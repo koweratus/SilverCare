@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.silvercare.viewmodel.LoginViewModel" />
+        <variable
+            name="loginOtpFragment"
+            type="com.example.silvercare.view.LoginOtpFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.LoginOtpFragment">
+
+        <LinearLayout
+            android:id="@+id/ll_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_marginTop="10dp"
+                android:text="Verification Code"
+                android:textAlignment="center"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/tv_code_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter the verification code we sent to +385xxxxxxxxx"
+                android:textAlignment="center"
+                android:textColor="#777777" />
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:hint="xxxxxxx"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textColorHint="#c5c5c5" />
+
+            <TextView
+                android:id="@+id/tv_resend_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:textColor="#777777"
+                android:text="@string/didn_t_get_the_code_resend" />
+
+            <Button
+                android:id="@+id/btn_code_verify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="Verify" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

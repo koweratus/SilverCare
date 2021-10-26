@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/login_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/loginPhoneNumberFragment">
 
+    <fragment
+        android:id="@+id/loginPhoneNumberFragment"
+        android:name="com.example.silvercare.view.LoginPhoneNumberFragment"
+        android:label="LoginPhoneNumberFragment">
+        tools:layout="@layout/fragment_login_phone_number">
+        <action
+            android:id="@+id/action_loginPhoneNumberFragment_to_loginOtpFragment"
+            app:destination="@id/loginOtpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginOtpFragment"
+        android:name="com.example.silvercare.view.LoginOtpFragment"
+        android:label="fragment_login_otp"
+        tools:layout="@layout/fragment_login_otp" >
+        <action
+            android:id="@+id/action_loginOtpFragment_to_loginFinishProfileFragment"
+            app:destination="@id/loginFinishProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFinishProfileFragment"
+        android:name="com.example.silvercare.view.LoginFinishProfileFragment"
+        android:label="fragment_login_finish_profile"
+        tools:layout="@layout/fragment_login_finish_profile" />
 </navigation>

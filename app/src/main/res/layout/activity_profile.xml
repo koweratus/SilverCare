@@ -7,7 +7,7 @@
     android:background="#f7f7f7"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ProfileActivity">
+    tools:context=".view.ProfileActivity">
 
     <TextView
         android:layout_width="wrap_content"
