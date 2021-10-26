@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "693158036579",
+    "project_id": "silver-care-cbd1e",
+    "storage_bucket": "silver-care-cbd1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693158036579:android:b819386c52f1011dab2456",
+        "android_client_info": {
+          "package_name": "com.example.silvercare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693158036579-hdqad03oaas99nqf8t2hr76qv9o5qira.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp9bVu9zNaBg4wY0cZu1hxgmzX_4m6hYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693158036579-hdqad03oaas99nqf8t2hr76qv9o5qira.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
