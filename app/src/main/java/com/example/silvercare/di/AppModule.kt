@@ -1,6 +1,6 @@
 package com.example.silvercare.di
 
-import com.example.silvercare.view.MainActivity
+import com.example.silvercare.view.activities.MainActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.example.silvercare.view
+package com.example.silvercare.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentCountryBinding
+import com.example.silvercare.view.AddCountries
+import com.example.silvercare.view.ItemClickListener
 import com.example.silvercare.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

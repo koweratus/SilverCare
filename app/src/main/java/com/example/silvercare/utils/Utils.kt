@@ -35,7 +35,7 @@ object Utils {
         return str
     }
 
-    fun getDefaultCountry() = Country("IN", "India", "+91", "INR")
+    fun getDefaultCountry() = Country("HR", "Croatia", "+385", "HRK")
 
     fun toast(context: Context, msg: String){
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

@@ -1,4 +1,4 @@
-package com.example.silvercare.view
+package com.example.silvercare.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,7 @@ import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentLoginOtpBinding
 import com.example.silvercare.utils.*
 import com.example.silvercare.utils.Utils.toast
+import com.example.silvercare.view.activities.HomeActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.PhoneAuthProvider
 
@@ -173,7 +174,7 @@ class LoginOtpFragment : Fragment() {
                 if (!userId.isNullOrEmpty() && findNavController().isValidDestination(R.id.LoginOtpFragment)) {
                     /*val action= LoginOtpFragmentDirections.actionFVerifyToFHome(userId,viewModel.lastRequestedMobile)
                     findNavController().navigate(action)*/
-                    startActivity(Intent(requireContext(),HomeActivity::class.java))
+                    startActivity(Intent(requireContext(), HomeActivity::class.java))
 
                 }
             })

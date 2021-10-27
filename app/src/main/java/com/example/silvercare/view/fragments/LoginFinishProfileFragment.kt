@@ -1,4 +1,4 @@
-package com.example.silvercare.view
+package com.example.silvercare.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

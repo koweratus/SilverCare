@@ -1,4 +1,4 @@
-package com.example.silvercare.view
+package com.example.silvercare.view.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -13,13 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentLoginPhoneNumberBinding
 import com.example.silvercare.model.Country
-import com.example.silvercare.model.User
 import com.example.silvercare.utils.*
 import com.example.silvercare.utils.Utils.toast
 import com.example.silvercare.utils.Utils.toastLong
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.example.silvercare.viewmodel.SharedViewModel
 import com.example.silvercare.utils.CustomProgressView
+import com.example.silvercare.view.activities.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -141,7 +141,7 @@ class LoginPhoneNumberFragment : Fragment() {
                     toastLong(requireContext(),"Authenticated successfully using Instant verification")
                     /*val action=LoginPhoneNumberFragmentDirections.actionFLoginToFHome(userId,viewModel.lastRequestedMobile)
                     findNavController().navigate(action)*/
-                    startActivity(Intent(requireContext(),HomeActivity::class.java))
+                    startActivity(Intent(requireContext(), HomeActivity::class.java))
                 }
             })
         } catch (e: Exception) {

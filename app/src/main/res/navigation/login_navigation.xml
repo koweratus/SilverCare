@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/CountryFragment"
-        android:name="com.example.silvercare.view.CountryFragment"
+        android:name="com.example.silvercare.view.fragments.CountryFragment"
         android:label="CountryFragment"
         tools:layout="@layout/fragment_country" />
     <fragment
         android:id="@+id/LoginOtpFragment"
-        android:name="com.example.silvercare.view.LoginOtpFragment"
+        android:name="com.example.silvercare.view.fragments.LoginOtpFragment"
         tools:layout="@layout/fragment_login_otp"
         android:label="LoginOtpFragment">
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/LoginPhoneNumberFragment"
-        android:name="com.example.silvercare.view.LoginPhoneNumberFragment"
+        android:name="com.example.silvercare.view.fragments.LoginPhoneNumberFragment"
         android:label="LoginPhoneNumberFragment"
         tools:layout="@layout/fragment_login_phone_number">
         <action

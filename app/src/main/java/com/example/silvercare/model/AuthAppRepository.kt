@@ -1,26 +1,19 @@
 package com.example.silvercare.model
 
 import android.app.Activity
-import android.app.Application
-import android.app.ProgressDialog
 import android.content.Context
-import android.os.Build
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.MutableLiveData
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import com.example.silvercare.utils.LogInFailedState
 import com.example.silvercare.utils.Utils.toast
-import com.example.silvercare.view.MainActivity
+import com.example.silvercare.view.activities.MainActivity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import dagger.hilt.android.scopes.ViewModelScoped
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.silvercare.view
+package com.example.silvercare.view.activities
 
 import android.os.Bundle
 import android.view.View
