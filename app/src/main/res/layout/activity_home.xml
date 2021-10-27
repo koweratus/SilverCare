@@ -20,7 +20,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     style="@style/CustomToolBar"
-                    app:title="LetsChat"
+                    app:title="SilverCare"
                     app:titleTextColor="@color/colorWhite" />
             </com.google.android.material.appbar.AppBarLayout>
 

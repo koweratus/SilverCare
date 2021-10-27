@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.LoginPhoneNumberFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.HomeFragment))
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
     }
