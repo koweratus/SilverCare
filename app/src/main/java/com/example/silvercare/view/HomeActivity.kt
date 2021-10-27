@@ -1,28 +1,34 @@
 package com.example.silvercare.view
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.silvercare.R
-import com.example.silvercare.databinding.ActivityMainBinding
+import com.example.silvercare.databinding.ActivityHomeBinding
+import com.example.silvercare.databinding.FragmentHomeBinding
 import com.example.silvercare.utils.isValidDestination
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
     }
 
@@ -31,14 +37,7 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.LoginPhoneNumberFragment))
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(navController.isValidDestination(R.id.CountryFragment))
-                binding.toolbar.visibility= View.GONE
-            else
-                binding.toolbar.visibility= View.VISIBLE
-        }
 
     }
-
 
 }

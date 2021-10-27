@@ -1,0 +1,86 @@
+package com.example.silvercare.view
+
+import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.silvercare.R
+import com.example.silvercare.databinding.FragmentHomeBinding
+import com.example.silvercare.utils.Constants
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import javax.annotation.Nullable
+
+class HomeFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var fAuth: FirebaseAuth
+    private lateinit var fStore: FirebaseFirestore
+    val args by navArgs<HomeFragmentArgs>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        fAuth = FirebaseAuth.getInstance()
+        fStore = FirebaseFirestore.getInstance()
+
+        val sharedPreferences =
+            this.getActivity()?.getSharedPreferences(Constants.MYSHOPPAL_PREFERENCES, Context.MODE_PRIVATE)
+        val username = sharedPreferences?.getString(Constants.LOGGED_IN_USERNAME, "")!!
+        binding.userId=args.userId
+        //binding.userId = fAuth.currentUser!!.uid
+
+        binding.mobile=username
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        binding.btnLogOut.setOnClickListener {
+            findNavController().navigate(R.id.action_FHome_to_FLogin)
+        }
+
+        checkUser()
+        //logout the user
+        binding.btnLogOut.setOnClickListener{
+            fAuth.signOut()
+            checkUser()
+        }
+    }
+
+
+
+private fun checkUser() {
+    //get current user
+    val firebaseUser = fAuth.currentUser
+    if ( firebaseUser == null){
+        //logged out
+        startActivity(Intent(requireContext(),MainActivity::class.java))
+
+    }else{
+        //logged in
+        val phone = firebaseUser?.phoneNumber
+        //set phone number
+        binding.txtNumber.text = phone
+    }
+}
+
+}

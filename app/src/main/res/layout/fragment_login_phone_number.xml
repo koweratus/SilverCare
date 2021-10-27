@@ -1,80 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="viewModel"
+            name="viewmodel"
             type="com.example.silvercare.viewmodel.LoginViewModel" />
-        <variable
-            name="loginPhoneNumberFragment"
-            type="com.example.silvercare.view.LoginPhoneNumberFragment" />
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f7f7f7"
-        android:orientation="vertical"
-        android:padding="10dp"
-        tools:context=".view.MainActivity">
-
-
-
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_phone_android" />
+    <RelativeLayout
+        style="@style/FView"
+        android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ll_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            style="@style/VView"
+            android:padding="16dp"
+            android:layout_marginBottom="40dp">
 
             <TextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TxtRgStyle"
                 android:layout_marginTop="10dp"
-                android:text="Phone Number"
-                android:textAlignment="center"
-                android:textColor="#000" />
+                android:text="@string/txt_enter_mob_no" />
+
+            <LinearLayout
+                style="@style/LView"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_edit_bg">
+
+                <TextView
+                    style="@style/WView"
+                    android:layout_marginStart="5dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:id="@+id/txt_country_code"
+                    android:text="@{viewmodel.country.noCode}"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    style="@style/LWView"
+                    android:id="@+id/edt_mobile"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:text="@={viewmodel.mobile}"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Please enter your Phone Number to continue"
-                android:textAlignment="center"
-                android:textColor="#777777" />
-
-            <EditText
-                android:id="@+id/et_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#fff"
-                android:hint="+385xxxxxxxxx"
-                android:inputType="phone"
-                android:padding="10dp"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textColorHint="#c5c5c5" />
-
-            <Button
-                android:id="@+id/btn_phone_continue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:text="Continue" />
-
-
+                style="@style/BtnStyle"
+                android:id="@+id/btn_get_otp"
+                android:layout_marginTop="60dp"
+                android:text="Send OTP" />
         </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

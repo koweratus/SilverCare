@@ -3,108 +3,128 @@ package com.example.silvercare.model
 import android.app.Activity
 import android.app.Application
 import android.app.ProgressDialog
+import android.content.Context
 import android.os.Build
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
+import com.example.silvercare.utils.LogInFailedState
+import com.example.silvercare.utils.Utils.toast
 import com.example.silvercare.view.MainActivity
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 import java.util.concurrent.TimeUnit
-
-class AuthAppRepository(private val application: Application) {
-    private val firebaseAuth: FirebaseAuth
-    val userLiveData: MutableLiveData<FirebaseUser?>
-    val loggedOutLiveData: MutableLiveData<Boolean>
-
-    private var forceResendingToken: PhoneAuthProvider.ForceResendingToken?
-
-    private var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks?
-    private var mVerifcationId: String?
-    //progress dialog
-    private lateinit var progressDialog: ProgressDialog
-    private val TAG = "MAIN_TAG"
+import javax.inject.Inject
 
 
-    fun startPhoneNumberVerification(phone: String) {
+class AuthAppRepository @Inject constructor(
+    @ActivityRetainedScoped val actContxt: MainActivity,
+    @ApplicationContext val context: Context
+) {
 
-        progressDialog.setMessage("Verifying Phone Number...")
-        progressDialog.show()
+    private val verificationId: MutableLiveData<String> = MutableLiveData()
 
-        val options = PhoneAuthOptions.newBuilder(firebaseAuth)
-            .setPhoneNumber(phone)
+    val credential: MutableLiveData<PhoneAuthCredential> = MutableLiveData()
+
+    private val taskResult: MutableLiveData<Task<AuthResult>> = MutableLiveData()
+
+    private val failedState: MutableLiveData<LogInFailedState> = MutableLiveData()
+
+    private val auth = FirebaseAuth.getInstance()
+    private lateinit var activity: Activity
+
+    fun sendOtp(activity: Activity,country: Country, mobile: String) {
+        val number = country.noCode + " " + mobile
+        this.activity = activity
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(number)
             .setTimeout(60L, TimeUnit.SECONDS)
-            .setActivity(Activity().parent)
-            .setCallbacks(callbacks!!)
+            .setActivity(activity)
+            .setCallbacks(listener)
             .build()
-
-        PhoneAuthProvider.verifyPhoneNumber(options)
-
-    }
-
-    fun resendVerification(phone: String, token: PhoneAuthProvider.ForceResendingToken) {
-        progressDialog.setMessage("Resending Code...")
-        progressDialog.show()
-
-        val options = PhoneAuthOptions.newBuilder(firebaseAuth)
-            .setPhoneNumber(phone)
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setCallbacks(callbacks!!)
-            .setActivity(Activity().parent)
-            .setForceResendingToken(token)
-            .build()
-
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    fun verifyPhoneNumberWithCode(verificationId: String, code: String) {
-        progressDialog.setMessage("Verifying Code...")
-        progressDialog.show()
-        Log.d(TAG, "verifyPhoneNumberWithCode: $verificationId")
-        val credential = PhoneAuthProvider.getCredential(verificationId, code)
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("TAG", "signInWithCredential:success")
+                    taskResult.value = task
+                } else {
+                    Log.w("TAG", "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException)
+                        toast(context, "Invalid verification code!")
+                    failedState.value = LogInFailedState.SignIn
+                }
+            }
+    }
+
+    fun setCredential(credential: PhoneAuthCredential) {
         signInWithPhoneAuthCredential(credential)
     }
 
-     fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        progressDialog.setMessage("Logging In")
-        Log.d(TAG, "loginWithCredential")
-        firebaseAuth.signInWithCredential(credential)
-            .addOnSuccessListener {
-                //login success
-                progressDialog.dismiss()
-                val phone = firebaseAuth.currentUser!!.phoneNumber
-                Toast.makeText(application.applicationContext, " Logged in as${phone}", Toast.LENGTH_SHORT)
-                    .show()
-
-                //start profile activity
-
-
-            }
-            .addOnFailureListener {
-                //login fail
-                    e ->
-                progressDialog.dismiss()
-                Toast.makeText(application.applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
-            }
+    fun getVCode(): MutableLiveData<String> {
+        return verificationId
     }
 
-    fun logOut() {
-        firebaseAuth.signOut()
-        loggedOutLiveData.postValue(true)
+    fun setVCodeNull() {
+        verificationId.value = null
     }
 
-    init {
-        firebaseAuth = FirebaseAuth.getInstance()
-        userLiveData = MutableLiveData()
-        loggedOutLiveData = MutableLiveData()
-        forceResendingToken = null
-        mVerifcationId = null
-        callbacks = null
-        if (firebaseAuth.currentUser != null) {
-            userLiveData.postValue(firebaseAuth.currentUser)
-            loggedOutLiveData.postValue(false)
+    fun clearOldAuth(){
+        credential.value=null
+        taskResult.value=null
+    }
+
+    fun getCredential(): LiveData<PhoneAuthCredential> {
+        return credential
+    }
+
+    fun getTaskResult(): LiveData<Task<AuthResult>> {
+        return taskResult
+    }
+
+    fun getFailed(): LiveData<LogInFailedState> {
+        return failedState
+    }
+
+    private val listener=object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            Log.d("TAG", "onVerificationCompleted:$credential")
+            this@AuthAppRepository.credential.value = credential
+            Handler().postDelayed({
+                signInWithPhoneAuthCredential(credential)
+            }, 1000)
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+            failedState.value = LogInFailedState.Verification
+            Log.e("TAG", "onVerificationFailed: ${e.message}")
+            when (e) {
+                is FirebaseAuthInvalidCredentialsException ->
+                    toast(context, "Invalid Request")
+                else -> toast(context, e.message.toString())
+            }
+        }
+
+        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+            super.onCodeSent(verificationId, token)
+            Log.d("TAG", "onCodeSent:$verificationId")
+            this@AuthAppRepository.verificationId.value = verificationId
+            toast(context, "Verification code sent successfully")
+        }
+
+        override fun onCodeAutoRetrievalTimeOut(p0: String) {
+            super.onCodeAutoRetrievalTimeOut(p0)
         }
     }
 }

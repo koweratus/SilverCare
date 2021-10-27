@@ -2,30 +2,43 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_navigation"
-    app:startDestination="@id/loginPhoneNumberFragment">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/LoginPhoneNumberFragment">
 
     <fragment
-        android:id="@+id/loginPhoneNumberFragment"
+        android:id="@+id/CountryFragment"
+        android:name="com.example.silvercare.view.CountryFragment"
+        android:label="CountryFragment"
+        tools:layout="@layout/fragment_country" />
+    <fragment
+        android:id="@+id/LoginOtpFragment"
+        android:name="com.example.silvercare.view.LoginOtpFragment"
+        tools:layout="@layout/fragment_login_otp"
+        android:label="LoginOtpFragment">
+        <action
+            android:id="@+id/action_FVerify_to_FHome"
+            app:destination="@id/HomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginPhoneNumberFragment"
         android:name="com.example.silvercare.view.LoginPhoneNumberFragment"
-        android:label="LoginPhoneNumberFragment">
+        android:label="LoginPhoneNumberFragment"
         tools:layout="@layout/fragment_login_phone_number">
         <action
-            android:id="@+id/action_loginPhoneNumberFragment_to_loginOtpFragment"
-            app:destination="@id/loginOtpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginOtpFragment"
-        android:name="com.example.silvercare.view.LoginOtpFragment"
-        android:label="fragment_login_otp"
-        tools:layout="@layout/fragment_login_otp" >
+            android:id="@+id/action_FLogin_to_FCountries"
+            app:destination="@id/CountryFragment" />
         <action
-            android:id="@+id/action_loginOtpFragment_to_loginFinishProfileFragment"
-            app:destination="@id/loginFinishProfileFragment" />
+            android:id="@+id/action_FLogin_to_FVerify"
+            app:destination="@id/LoginOtpFragment" />
+        <action
+            android:id="@+id/action_FLogin_to_FHome"
+            app:destination="@id/HomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/loginFinishProfileFragment"
-        android:name="com.example.silvercare.view.LoginFinishProfileFragment"
-        android:label="fragment_login_finish_profile"
-        tools:layout="@layout/fragment_login_finish_profile" />
+
 </navigation>
