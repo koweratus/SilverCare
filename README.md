@@ -4,6 +4,4 @@ App designed to help elderly people and their youngins
 Draft login desing.
 
 
-
-
-![prva](https://user-images.githubusercontent.com/37325745/139082441-8dfffe3f-5b70-47f6-aa94-a299b0a43498.PNG)    ![aa](https://user-images.githubusercontent.com/37325745/139082427-4319bf28-a244-423d-85d1-460a8a5eae19.PNG)
+![prva](https://user-images.githubusercontent.com/37325745/139082852-a1e7ab07-8f10-4a91-9ad3-265a434c4c3f.PNG)   ![aa](https://user-images.githubusercontent.com/37325745/139082863-cfed1404-989e-42a9-bf9d-243647fe757a.PNG)
