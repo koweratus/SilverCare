@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
         binding.btnLogOut.setOnClickListener {
             fAuth.signOut()
             checkUser()
+
         }
     }
 
@@ -60,7 +61,12 @@ class HomeFragment : Fragment() {
         val firebaseUser = fAuth.currentUser
         if (firebaseUser == null) {
             //logged out
-            startActivity(Intent(requireContext(), MainActivity::class.java))
+
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            activity?.finish()
+
 
         } else {
             //logged in

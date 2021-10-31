@@ -1,23 +1,21 @@
 package com.example.silvercare.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentLoginOtpBinding
 import com.example.silvercare.utils.*
 import com.example.silvercare.utils.Utils.toast
-import com.example.silvercare.view.activities.HomeActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.PhoneAuthProvider
 
@@ -69,6 +67,7 @@ class LoginOtpFragment : Fragment() {
                 viewModel.startTimer()
             binding.btnVerify.setOnClickListener {
                 validateOtp()
+
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -166,16 +165,24 @@ class LoginOtpFragment : Fragment() {
 
             viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                 taskId?.let {
-                    viewModel.fetchUser(taskId)
+                    val type = viewModel.type.value
+
+                        viewModel.fetchUser(taskId,type!!)
                 }
             })
 
             viewModel.userProfileGot.observe(viewLifecycleOwner, { userId ->
                 if (!userId.isNullOrEmpty() && findNavController().isValidDestination(R.id.LoginOtpFragment)) {
-                    /*val action= LoginOtpFragmentDirections.actionFVerifyToFHome(userId,viewModel.lastRequestedMobile)
-                    findNavController().navigate(action)*/
-                    startActivity(Intent(requireContext(), HomeActivity::class.java))
+                    //val action= LoginOtpFragmentDirections.actionFVerifyToFHome(userId,viewModel.lastRequestedMobile)
 
+                    val type = viewModel.type.value
+                    if (type!!) {
+                        findNavController().navigate(R.id.loginPersonalInformationFragment)
+                    }else{
+                        findNavController().navigate(R.id.qrCodeScannerFragment)
+                    }
+                        /* startActivity(Intent(requireContext(), HomeActivity::class.java))
+                    activity?.finish()*/
                 }
             })
         } catch (e: Exception) {

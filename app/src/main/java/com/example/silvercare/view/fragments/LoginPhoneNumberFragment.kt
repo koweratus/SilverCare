@@ -21,6 +21,7 @@ import com.example.silvercare.viewmodel.SharedViewModel
 import com.example.silvercare.utils.CustomProgressView
 import com.example.silvercare.view.activities.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.newFixedThreadPoolContext
 
 @AndroidEntryPoint
 class LoginPhoneNumberFragment : Fragment() {
@@ -132,16 +133,20 @@ class LoginPhoneNumberFragment : Fragment() {
 
             viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                 if (taskId!=null && viewModel.getCredential().value?.smsCode.isNullOrEmpty()){
-                    viewModel.fetchUser(taskId)}
+                    val type = viewModel.type.value
+                    viewModel.fetchUser(taskId,type!!)}
             })
 
             viewModel.userProfileGot.observe(viewLifecycleOwner, { userId ->
                 if (!userId.isNullOrEmpty() && viewModel.getCredential().value?.smsCode.isNullOrEmpty()
                     && findNavController().isValidDestination(R.id.LoginPhoneNumberFragment)) {
                     toastLong(requireContext(),"Authenticated successfully using Instant verification")
-                    /*val action=LoginPhoneNumberFragmentDirections.actionFLoginToFHome(userId,viewModel.lastRequestedMobile)
-                    findNavController().navigate(action)*/
-                    startActivity(Intent(requireContext(), HomeActivity::class.java))
+                   // val action=LoginPhoneNumberFragmentDirections.actionFLoginToFHome(userId,viewModel.lastRequestedMobile)
+                   // findNavController().navigate(action)
+                    findNavController().navigate(R.id.loginChooseUserTypeFragment)
+
+                   /* startActivity(Intent(requireContext(), HomeActivity::class.java))
+                    activity?.finish()*/
                 }
             })
         } catch (e: Exception) {

@@ -4,7 +4,8 @@ object Constants {
 
     // Firebase Constants
     // This  is used for the collection name for USERS.
-    const val USERS: String = "users"
+    const val USERS: String = "Users"
+    const val CARETAKERS: String = "Caretakers"
 
     // TODO Step 1: Create a constant variables for Android SharedPreferences and Username Key.
     // START

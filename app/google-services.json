@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "693158036579",
+    "firebase_url": " https://silver-care-cbd1e-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "silver-care-cbd1e",
     "storage_bucket": "silver-care-cbd1e.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "693158036579-dnibu57ande6557pp003r0rgia8m9c3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.silvercare",
+            "certificate_hash": "322ad0f4d8c19ce4e81fdba77dab33bc4079e6ae"
+          }
+        },
         {
           "client_id": "693158036579-hdqad03oaas99nqf8t2hr76qv9o5qira.apps.googleusercontent.com",
           "client_type": 3

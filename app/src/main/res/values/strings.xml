@@ -10,5 +10,15 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="et_dob">Enter your Date Of Birth</string>
+    <string name="caretaker">Caretaker</string>
+    <string name="senior">Senior</string>
+    <string name="continues">Continue</string>
+    <string name="finish">Finish</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="would_you_like_to_receive_newsletter">Would you like to receive newsletter</string>
+    <string name="qr_code">qr_code</string>
+    <string name="enter_your_info">Enter your info</string>
+    <string name="generate_qr_code">Generate QR Code</string>
 
 </resources>

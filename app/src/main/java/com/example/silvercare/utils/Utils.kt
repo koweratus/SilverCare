@@ -12,9 +12,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.navigation.NavController
+import com.example.silvercare.R
 import com.example.silvercare.model.Country
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.google.i18n.phonenumbers.Phonenumber
+import java.util.*
 
 object Utils {
 
@@ -37,11 +39,11 @@ object Utils {
 
     fun getDefaultCountry() = Country("HR", "Croatia", "+385", "HRK")
 
-    fun toast(context: Context, msg: String){
+    fun toast(context: Context, msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
-    fun toastLong(context: Context, msg: String){
+    fun toastLong(context: Context, msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 
@@ -75,23 +77,27 @@ object Utils {
     }
 
     fun isNoInternet(context: Context) = !isNetConnected(context)
+
 }
 
 fun NavController.isValidDestination(destination: Int): Boolean {
     return destination == this.currentDestination!!.id
 }
 
-fun Char.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this.toString())
+fun Char.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this.toString())
 
-fun CustomProgressView.toggle(show: Boolean){
+fun CustomProgressView.toggle(show: Boolean) {
     if (show)
         this.show()
     else
         this.dismiss();
 }
 
-fun CustomProgressView.dismissIfShowing(){
+fun CustomProgressView.dismissIfShowing() {
     if (this.isShowing)
         this.dismiss()
 }
+
+
+
 
