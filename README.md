@@ -2,8 +2,4 @@
 App designed to help elderly people and their youngins
 
 Login desing.
-
-![Screenshot_1635769482](https://user-images.githubusercontent.com/37325745/139671483-607b846e-181e-4558-8f66-65a2d2f18e14.png)
-![Screenshot_1635769317](https://user-images.githubusercontent.com/37325745/139671486-4193fe48-c6d5-4012-b3c8-cca76cdd08d2.png) ![Screenshot_1635769288](https://user-images.githubusercontent.com/37325745/139671492-6ab45e31-1b2a-41ae-ae2a-189a130d5c46.png)
-![Screenshot_1635769375](https://user-images.githubusercontent.com/37325745/139671494-15a6660c-c825-4fe5-918b-61cded33dc2e.png) ![Screenshot_1635769428](https://user-images.githubusercontent.com/37325745/139671496-b8b8138b-16cd-4dee-b841-2e4870af937f.png)
-![Screenshot_1635769455](https://user-images.githubusercontent.com/37325745/139671498-df9ee988-2468-4724-b616-1ea8165e6240.png) ![Screenshot_1635769527](https://user-images.githubusercontent.com/37325745/139671499-2c5c857b-c823-44f3-b792-9d412f25f66e.png)
+![Splash](https://user-images.githubusercontent.com/37325745/139671683-0722c567-8688-4eb3-85aa-919890f50188.png) ![userType](https://user-images.githubusercontent.com/37325745/139671684-2b490a7a-ced3-4259-b423-2c088060501f.png) ![phone](https://user-images.githubusercontent.com/37325745/139671689-09cecf15-99fc-4ff2-98cc-73e2f28785e3.png) ![code](https://user-images.githubusercontent.com/37325745/139671692-a5d60a76-6f01-4a85-8e5d-f515b964400f.png) ![details](https://user-images.githubusercontent.com/37325745/139671695-b0900352-298c-412d-9bf1-9fbd8ccedd25.png) ![qr](https://user-images.githubusercontent.com/37325745/139671698-63ad6d5b-66cf-454c-baf6-8475bcba7715.png) ![email](https://user-images.githubusercontent.com/37325745/139671701-735c1869-8b5c-40c3-8905-20105c319b98.png)
