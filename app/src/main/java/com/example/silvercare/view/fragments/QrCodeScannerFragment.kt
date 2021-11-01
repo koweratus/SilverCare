@@ -137,22 +137,20 @@ class QrCodeScannerFragment : Fragment() {
                     // See API reference for complete list of supported types
                     when (valueType) {
                         Barcode.TYPE_TEXT -> {
-                           Toast.makeText(requireContext(), rawValue,Toast.LENGTH_SHORT).show()
                             loginViewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                                 taskId?.let {
-                                    loginViewModel.fetchSeniorUser(taskId,rawValue!!)
-                                    val intent=Intent(requireContext(),HomeActivity::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-
-requireActivity().finish()
+                                    loginViewModel.fetchSeniorUser(taskId, rawValue!!)
                                 }
-
                             })
-
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                            activity?.finish()
                         }
 
                     }
                 }
+
             }
             .addOnFailureListener {
                 Log.e(TAG, it.message!!)

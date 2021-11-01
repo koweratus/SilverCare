@@ -70,7 +70,7 @@
                     android:id="@+id/edt_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:inputType="phone"
                     android:text="@={viewmodel.mobile}"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />

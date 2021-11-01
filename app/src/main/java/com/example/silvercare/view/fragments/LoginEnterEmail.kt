@@ -33,16 +33,17 @@ class LoginEnterEmail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
 
-        binding.btnFinish.setOnClickListener{
+        binding.btnFinish.setOnClickListener {
+            viewModel.email.value = binding.etEmail.text.toString()
             viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                 taskId?.let {
-                    viewModel.fetchUser(taskId,true)
+                    viewModel.insertEmail(taskId)
                 }
             })
-            val intent=Intent(requireContext(),HomeActivity::class.java)
+            val intent = Intent(requireContext(), HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-
-            requireActivity().finish()
+            startActivity(intent)
+            activity?.finish()
         }
     }
 

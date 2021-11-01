@@ -59,11 +59,13 @@ class LoginShowQrCode : Fragment() {
 
     fun getQrCode() {
 
+        val caretakerName = viewModel.seniorName.value.toString()
         val seniorName = viewModel.seniorName.value.toString()
         val seniorDob = viewModel.seniorDob.value.toString()
+        val caretakerDob = viewModel.seniorDob.value.toString()
         val id = viewModel.getCurrentUserID()
         val mobile = viewModel.mobile.value.toString()
-        val msg = "$seniorName;$seniorDob;$id;$mobile;"
+        val msg = "$seniorName;$seniorDob;$id;$mobile;$caretakerName;$caretakerDob"
         if (TextUtils.isEmpty(seniorName)) {
 
             // if the edittext inputs are empty then execute

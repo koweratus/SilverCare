@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentHomeBinding
 import com.example.silvercare.utils.Constants
 import com.example.silvercare.view.activities.MainActivity
+import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -21,6 +23,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var fAuth: FirebaseAuth
     private lateinit var fStore: FirebaseFirestore
+    private val viewModel by activityViewModels<LoginViewModel>()
     val args by navArgs<HomeFragmentArgs>()
 
     override fun onCreateView(
@@ -45,9 +48,13 @@ class HomeFragment : Fragment() {
         checkUser()
         //logout the user
         binding.btnLogOut.setOnClickListener {
+            viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
+                taskId?.let {
+                    viewModel.deleteCaretakersDocument(taskId)
+                }
+            })
             fAuth.signOut()
             checkUser()
-
         }
     }
 
