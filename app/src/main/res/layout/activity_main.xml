@@ -14,15 +14,6 @@
         <LinearLayout
             style="@style/FView">
 
-            <com.google.android.material.appbar.AppBarLayout
-                style="@style/VView">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/CustomToolBar"
-                    app:title="LetsChat"
-                    app:titleTextColor="@color/colorWhite" />
-            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment"

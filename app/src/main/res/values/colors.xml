@@ -8,8 +8,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorWhite">#fff</color>
     <color name="colorPrimaryLt">#615C5585</color>
     <color name="colorDefaultBg">#f8f9fa</color>
 
+    <color name="colorPrimary">#005EFF</color>
+    <color name="colorPrimaryDark">#222934</color>
+    <color name="colorAccent">#2154ED</color>
+
+    <color name="colorThemeBrightBlue">#00EAFF</color>
+    <color name="colorThemeBlue">#0048FF</color>
+
+    <color name="colorPrimaryText">#222934</color>
+    <color name="colorSecondaryText">#989898</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorSnackBarSuccess">#8BC34A</color>
+    <color name="colorSnackBarError">#F72400</color>
+
+    <color name="colorLightGrey">#F1F1F1</color>
+
+    <color name="colorBorder">#E8E6E6</color>
+    <color name="colorDarkGrey">#878787</color>
 </resources>

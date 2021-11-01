@@ -3,9 +3,11 @@
     <string name="tv_camera">Camera</string>
     <string name="lbl_gallery">Gallery</string>
     <string name="title_select_image_action">Select Image Action</string>
+
+    <string name="content_description">image</string>
     <string name="txt_enter_mob_no">Enter Mobile Number</string>
     <string name="txt_search">Search</string>
-    <string name="txt_enter_otp">Enter the OTP sent to </string>
+    <string name="txt_enter_otp">Enter the code sent to </string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -20,5 +22,12 @@
     <string name="qr_code">qr_code</string>
     <string name="enter_your_info">Enter your info</string>
     <string name="generate_qr_code">Generate QR Code</string>
+    <string name="haven_t_receive_yet">Haven\'t receive yet?</string>
+    <string name="caretaker_name">Caretaker name</string>
+    <string name="senior_name">Senior Name</string>
+    <string name="enter_senior_date_of_birth">Enter Senior Date of Birth</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="logout">Logout</string>
+    <string name="how_do_you_plan_to_use_the_application">What type of user are you?</string>
 
 </resources>

@@ -15,11 +15,11 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/CustomToolBar"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="LetsChat"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:titleTextColor="@color/colorWhite" />
+                android:layout_width="match_parent"
+                app:title="@string/select_your_country"
+                app:titleTextColor="@color/colorWhite"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/app_gradient_color_background" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView

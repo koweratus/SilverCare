@@ -7,6 +7,7 @@ import android.telephony.TelephonyManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -32,14 +33,21 @@ class LoginPhoneNumberFragment : Fragment() {
 
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
-    private var progressView: CustomProgressView?=null
+    private var progressView: CustomProgressView? = null
 
     private val viewModel by activityViewModels<LoginViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
+
+        activity?.window?.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
         binding = FragmentLoginPhoneNumberBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -74,7 +82,10 @@ class LoginPhoneNumberFragment : Fragment() {
                     requireActivity(),
                     "Enter valid mobile number"
                 )
-                Utils.isNoInternet(requireContext()) -> toast(requireActivity(),"No Internet Connection!")
+                Utils.isNoInternet(requireContext()) -> toast(
+                    requireActivity(),
+                    "No Internet Connection!"
+                )
                 else -> {
                     viewModel.sendOtp(requireActivity())
                     viewModel.setProgress(true)
@@ -132,21 +143,26 @@ class LoginPhoneNumberFragment : Fragment() {
             })
 
             viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
-                if (taskId!=null && viewModel.getCredential().value?.smsCode.isNullOrEmpty()){
+                if (taskId != null && viewModel.getCredential().value?.smsCode.isNullOrEmpty()) {
                     val type = viewModel.type.value
-                    viewModel.fetchUser(taskId,type!!)}
+                    viewModel.fetchUser(taskId, type!!)
+                }
             })
 
             viewModel.userProfileGot.observe(viewLifecycleOwner, { userId ->
                 if (!userId.isNullOrEmpty() && viewModel.getCredential().value?.smsCode.isNullOrEmpty()
-                    && findNavController().isValidDestination(R.id.LoginPhoneNumberFragment)) {
-                    toastLong(requireContext(),"Authenticated successfully using Instant verification")
-                   // val action=LoginPhoneNumberFragmentDirections.actionFLoginToFHome(userId,viewModel.lastRequestedMobile)
-                   // findNavController().navigate(action)
+                    && findNavController().isValidDestination(R.id.LoginPhoneNumberFragment)
+                ) {
+                    toastLong(
+                        requireContext(),
+                        "Authenticated successfully using Instant verification"
+                    )
+                    // val action=LoginPhoneNumberFragmentDirections.actionFLoginToFHome(userId,viewModel.lastRequestedMobile)
+                    // findNavController().navigate(action)
                     findNavController().navigate(R.id.loginChooseUserTypeFragment)
 
-                   /* startActivity(Intent(requireContext(), HomeActivity::class.java))
-                    activity?.finish()*/
+                    /* startActivity(Intent(requireContext(), HomeActivity::class.java))
+                     activity?.finish()*/
                 }
             })
         } catch (e: Exception) {
