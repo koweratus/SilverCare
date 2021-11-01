@@ -1,7 +1,7 @@
 # SilverCare
 App designed to help elderly people and their youngins
 
-Draft login desing.
+Login desing.
 
 
-![prva](https://user-images.githubusercontent.com/37325745/139082852-a1e7ab07-8f10-4a91-9ad3-265a434c4c3f.PNG)   ![aa](https://user-images.githubusercontent.com/37325745/139082863-cfed1404-989e-42a9-bf9d-243647fe757a.PNG)  ![Capture](https://user-images.githubusercontent.com/37325745/139265368-12059358-47b5-49f7-b949-a53e9ab2b508.PNG)
+![Splash](https://user-images.githubusercontent.com/37325745/139671683-0722c567-8688-4eb3-85aa-919890f50188.png) ![userType](https://user-images.githubusercontent.com/37325745/139671684-2b490a7a-ced3-4259-b423-2c088060501f.png) ![phone](https://user-images.githubusercontent.com/37325745/139671689-09cecf15-99fc-4ff2-98cc-73e2f28785e3.png) ![code](https://user-images.githubusercontent.com/37325745/139671692-a5d60a76-6f01-4a85-8e5d-f515b964400f.png) ![details](https://user-images.githubusercontent.com/37325745/139671695-b0900352-298c-412d-9bf1-9fbd8ccedd25.png) ![qr](https://user-images.githubusercontent.com/37325745/139671698-63ad6d5b-66cf-454c-baf6-8475bcba7715.png) ![email](https://user-images.githubusercontent.com/37325745/139671701-735c1869-8b5c-40c3-8905-20105c319b98.png)
