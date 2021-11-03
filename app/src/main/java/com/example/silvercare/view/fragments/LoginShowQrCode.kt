@@ -52,7 +52,12 @@ class LoginShowQrCode : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
         getQrCode()
-        binding.idBtnGenerateQR.setOnClickListener{
+        binding.btnContinueToEmail.setOnClickListener{
+            viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
+                taskId?.let {
+                   viewModel.checkIfUsersAreConnected(taskId)
+                }
+            })
             findNavController().navigate(R.id.loginEnterEmail)
         }
     }

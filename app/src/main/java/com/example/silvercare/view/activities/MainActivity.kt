@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -12,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.silvercare.R
 import com.example.silvercare.databinding.ActivityMainBinding
 import com.example.silvercare.utils.isValidDestination
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +39,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
 }

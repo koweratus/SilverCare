@@ -52,6 +52,8 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />
 

@@ -53,11 +53,12 @@
                     android:id="@+id/et_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:inputType="text"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -74,6 +75,8 @@
                     android:id="@+id/et_date_picker_caretaker"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:inputType="date"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />
 
@@ -92,6 +95,8 @@
                 <com.example.silvercare.utils.SCEditText
                     android:id="@+id/et_senior_name"
                     android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />
@@ -110,6 +115,8 @@
                 <com.example.silvercare.utils.SCEditText
                     android:id="@+id/et_date_picker_senior"
                     android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:inputType="date"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />

@@ -50,7 +50,7 @@
 
             <!--Button for creating a QR code-->
             <com.example.silvercare.utils.SCButton
-                android:id="@+id/idBtnGenerateQR"
+                android:id="@+id/btn_continue_to_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
