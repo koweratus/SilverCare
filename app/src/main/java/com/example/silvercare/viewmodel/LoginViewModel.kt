@@ -7,11 +7,9 @@ import android.content.SharedPreferences
 import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import com.example.silvercare.R
 import com.example.silvercare.model.AuthAppRepository
 import com.example.silvercare.model.Caretaker
@@ -27,12 +25,8 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.firestore.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityScoped
-import java.lang.Boolean.getBoolean
 import java.util.*
 import javax.inject.Inject
-import javax.inject.Singleton
-import kotlin.collections.HashMap
 
 @HiltViewModel
 class LoginViewModel @Inject
@@ -61,6 +55,8 @@ constructor(
     val userProfileGot = MutableLiveData("")
 
     private val progress = MutableLiveData(false)
+
+    val isProfileCompleted = MutableLiveData(false)
 
     private val verifyProgress = MutableLiveData(false)
 
@@ -245,17 +241,19 @@ constructor(
             val user = Caretaker(
                 firebaseUser.uid,
                 mobile.value.toString(),
-                email = email.value.toString()
+                email = email.value.toString(),
+                profileCompleted = false
             )
 
             val db = FirebaseFirestore.getInstance()
-            val noteRef = db.collection(Constants.CARETAKERS).document(firebaseUser.uid.toString())
+            val noteRef = db.collection(Constants.CARETAKERS).document(firebaseUser.uid)
             noteRef.set(user).addOnSuccessListener { doc ->
 
                 noteRef.set(user, SetOptions.merge())
                     .addOnSuccessListener { data ->
                         setVProgress(false)
                         progress.value = false
+
                         //if (data.exists()) {  //already created user
                         //save profile in preference
                         // START
@@ -281,13 +279,15 @@ constructor(
                         progress.value = false
                         Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
                     }
-            }
 
+            }
 
         } else {
             val user = User(
                 firebaseUser.uid,
-                mobile.value.toString()
+                mobile.value.toString(),
+                profileCompleted = false
+
             )
 
             val db = FirebaseFirestore.getInstance()
@@ -325,6 +325,7 @@ constructor(
 
 
     }
+
 
     fun deleteCaretakersDocument(taskId: Task<AuthResult>) {
         val firebaseUser: FirebaseUser = taskId.result.user!!
@@ -335,152 +336,183 @@ constructor(
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
-    fun checkIfUsersAreConnected(taskId: Task<AuthResult>): Boolean {
+    fun checkIfUsersAreConnected(taskId: Task<AuthResult>) {
         val firebaseUser: FirebaseUser = taskId.result.user!!
         val db = FirebaseFirestore.getInstance()
-        db.collection(Constants.CARETAKERS).document(firebaseUser.uid).get().addOnCompleteListener {
-
-
-            /*         val task : Task<QuerySnapshot>
-            if (taskId.isSuccessful){
-                for (document: QueryDocumentSnapshot in taskId.result ){
-               val exists = document.getBoolean("friend")
-                    if (exists != null){
-                        return@addOnCompleteListener true
-                    }
+        db.collection(Constants.CARETAKERS).document(firebaseUser.uid).get()
+            .addOnSuccessListener { documentSnapshot ->
+                var friend: String
+                if (documentSnapshot.exists()) {
+                    friend = documentSnapshot.getString("friend")!!
+                    isProfileCompleted.value = friend.isNotEmpty()
+                } else {
+                    Toast.makeText(context, R.string.users_connected, Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener { e ->
+                Toast.makeText(context, R.string.users_not_connected, Toast.LENGTH_SHORT).show()
             }
-        }*/
-        }
-        return false
     }
-        fun fetchSeniorUser(taskId: Task<AuthResult>, name: String) {
-            val firebaseUser: FirebaseUser = taskId.result.user!!
-            val fname: String = name.split(";")[0]
-            val dob: String = name.split(";")[1]
-            val id: String = name.split(";")[2]
-            val cmobile: String = name.split(";")[3]
-            val cname: String = name.split(";")[4]
-            val cdob: String = name.split(";")[5]
 
-            val user = User(
-                firebaseUser.uid,
-                username = fname,
-                dob = dob,
-                friend = id,
-                mobile = mobile.value.toString()
+    fun updateIsProfileCompleted(taskId: Task<AuthResult>, type: String) {
+        val firebaseUser: FirebaseUser = taskId.result.user!!
 
-            )
-            val db = FirebaseFirestore.getInstance()
-            val noteRef = db.collection(Constants.USERS).document(firebaseUser.uid.toString())
 
-            noteRef.set(user, SetOptions.merge())
-                .addOnSuccessListener { data ->
-                    setVProgress(false)
-                    progress.value = false
-                    //if (data.exists()) {  //already created user
-                    //save profile in preference
-                    // START
-                    val sharedPreferences =
-                        activity.getSharedPreferences(
-                            Constants.MYSHOPPAL_PREFERENCES,
-                            Context.MODE_PRIVATE
-                        )
-
-                    // Create an instance of the editor which is help us to edit the SharedPreference.
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putString(
-                        Constants.LOGGED_IN_USERNAME,
-                        "${user.username} ${user.mobile}"
-                    )
-                    editor.apply()
-                    // END
-
-                    // }
-                    userProfileGot.value = firebaseUser.uid
-                }.addOnFailureListener { e ->
-                    setVProgress(false)
-                    progress.value = false
-                    Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
-                }
-
-            val caretaker = Caretaker(
-                id = id,
-                mobile = cmobile,
-                friend = firebaseUser.uid,
-                username = cname,
-                dob = cdob
-            )
-
-            val ref = db.collection(Constants.CARETAKERS).document(id)
-            ref.set(caretaker, SetOptions.merge())
-                .addOnSuccessListener { data ->
-                    setVProgress(false)
-                    progress.value = false
-                }.addOnFailureListener { e ->
-                    setVProgress(false)
-                    progress.value = false
-                    Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
-                }
+        val db = FirebaseFirestore.getInstance()
+        val noteRef = db.collection(type).document(firebaseUser.uid)
+        noteRef.update("profileCompleted", isProfileCompleted.value).addOnSuccessListener {
+            setVProgress(false)
+            progress.value = false
+        }.addOnFailureListener { e ->
+            setVProgress(false)
+            progress.value = false
+            Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
         }
+    }
+    fun checkIfProfileIsCompleted(taskId: FirebaseUser?,type: String) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection(type).document(taskId?.uid!!).get()
+            .addOnSuccessListener { documentSnapshot ->
+                var friend: Boolean
+                if (documentSnapshot.exists()) {
+                    friend = documentSnapshot.getBoolean("profileCompleted")!!
+                    isProfileCompleted.value = friend
+                }
+            }.addOnFailureListener { e ->
+                Toast.makeText(context, R.string.users_not_connected, Toast.LENGTH_SHORT).show()
+            }
+    }
+    fun fetchSeniorUser(taskId: Task<AuthResult>, name: String) {
+        val firebaseUser: FirebaseUser = taskId.result.user!!
+        val fname: String = name.split(";")[0]
+        val dob: String = name.split(";")[1]
+        val id: String = name.split(";")[2]
+        val cmobile: String = name.split(";")[3]
+        val cname: String = name.split(";")[4]
+        val cdob: String = name.split(";")[5]
 
-        /**
-         * A function to get the user id of current logged user.
-         */
-        fun getCurrentUserID(): String {
-            // An Instance of currentUser using FirebaseAuth
-            val currentUser = FirebaseAuth.getInstance().currentUser
+        val user = User(
+            firebaseUser.uid,
+            username = fname,
+            dob = dob,
+            friend = id,
+            mobile = mobile.value.toString(),
+            profileCompleted = false
 
-            // A variable to assign the currentUserId if it is not null or else it will be blank.
-            var currentUserID = ""
-            if (currentUser != null) {
-                currentUserID = currentUser.uid
+
+        )
+        val db = FirebaseFirestore.getInstance()
+        val noteRef = db.collection(Constants.USERS).document(firebaseUser.uid.toString())
+
+        noteRef.set(user, SetOptions.merge())
+            .addOnSuccessListener { data ->
+                setVProgress(false)
+                progress.value = false
+                //if (data.exists()) {  //already created user
+                //save profile in preference
+                // START
+                val sharedPreferences =
+                    activity.getSharedPreferences(
+                        Constants.MYSHOPPAL_PREFERENCES,
+                        Context.MODE_PRIVATE
+                    )
+
+                // Create an instance of the editor which is help us to edit the SharedPreference.
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(
+                    Constants.LOGGED_IN_USERNAME,
+                    "${user.username} ${user.mobile}"
+                )
+                editor.apply()
+                // END
+
+                // }
+                userProfileGot.value = firebaseUser.uid
+            }.addOnFailureListener { e ->
+                setVProgress(false)
+                progress.value = false
+                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
             }
 
-            return currentUserID
+        val caretaker = Caretaker(
+            id = id,
+            mobile = cmobile,
+            friend = firebaseUser.uid,
+            username = cname,
+            dob = cdob,
+            profileCompleted = false
+
+        )
+
+        val ref = db.collection(Constants.CARETAKERS).document(id)
+        ref.set(caretaker, SetOptions.merge())
+            .addOnSuccessListener { data ->
+                setVProgress(false)
+                progress.value = false
+            }.addOnFailureListener { e ->
+                setVProgress(false)
+                progress.value = false
+                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    /**
+     * A function to get the user id of current logged user.
+     */
+    fun getCurrentUserID(): String {
+        // An Instance of currentUser using FirebaseAuth
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        // A variable to assign the currentUserId if it is not null or else it will be blank.
+        var currentUserID = ""
+        if (currentUser != null) {
+            currentUserID = currentUser.uid
         }
 
-        fun getUserDetails(activity: Activity) {
-            this.activity = activity
-            // Here we pass the collection name from which we wants the data.
-            fireStore.collection(Constants.USERS)
-                // The document id to get the Fields of user.
-                .document(getCurrentUserID())
-                .get()
-                .addOnSuccessListener { document ->
+        return currentUserID
+    }
+
+    fun getUserDetails(activity: Activity) {
+        this.activity = activity
+        // Here we pass the collection name from which we wants the data.
+        fireStore.collection(Constants.USERS)
+            // The document id to get the Fields of user.
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
 
 
-                    // Here we have received the document snapshot which is converted into the User Data model object.
-                    val user = document.toObject(User::class.java)!!
+                // Here we have received the document snapshot which is converted into the User Data model object.
+                val user = document.toObject(User::class.java)!!
 
-                    val sharedPreferences =
-                        activity.getSharedPreferences(
-                            Constants.MYSHOPPAL_PREFERENCES,
-                            Context.MODE_PRIVATE
-                        )
-
-                    // Create an instance of the editor which is help us to edit the SharedPreference.
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putString(
-                        Constants.LOGGED_IN_USERNAME,
-                        "${user.username} ${user.mobile}"
+                val sharedPreferences =
+                    activity.getSharedPreferences(
+                        Constants.MYSHOPPAL_PREFERENCES,
+                        Context.MODE_PRIVATE
                     )
-                    editor.apply()
+
+                // Create an instance of the editor which is help us to edit the SharedPreference.
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(
+                    Constants.LOGGED_IN_USERNAME,
+                    "${user.username} ${user.mobile}"
+                )
+                editor.apply()
 
 
-                }
-                .addOnFailureListener { e ->
-                    // Hide the progress dialog if there is any error. And print the error in log.
-                    setVProgress(false)
-                    progress.value = false
-                    Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
-                }
-
-        }
-
-        fun clearAll() {
-            userProfileGot.value = null
-            authRepo.clearOldAuth()
-        }
-
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error. And print the error in log.
+                setVProgress(false)
+                progress.value = false
+                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+            }
 
     }
+
+    fun clearAll() {
+        userProfileGot.value = null
+        authRepo.clearOldAuth()
+    }
+
+
+}

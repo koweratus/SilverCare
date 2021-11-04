@@ -19,10 +19,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.silvercare.R
 import com.example.silvercare.databinding.LoginShowQrcodeBinding
+import com.example.silvercare.utils.BaseActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.zxing.WriterException
 
-class LoginShowQrCode : Fragment() {
+class LoginShowQrCode : BaseActivity() {
 
     private var seniorName: String? = null
     private var caretakerName: String? = null
@@ -58,7 +59,16 @@ class LoginShowQrCode : Fragment() {
                    viewModel.checkIfUsersAreConnected(taskId)
                 }
             })
-            findNavController().navigate(R.id.loginEnterEmail)
+            viewModel.isProfileCompleted.observe(viewLifecycleOwner, {
+                if (viewModel.isProfileCompleted.value == true){
+                    findNavController().navigate(R.id.loginEnterEmail)
+                    showErrorSnackBar("SUCCESSFULLY CONNECTED WITH SENIOR!",false,requireActivity())
+                }else{
+                    showErrorSnackBar("NIGGA NO!",true,requireActivity())
+                }
+            })
+
+
         }
     }
 

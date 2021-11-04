@@ -32,6 +32,8 @@
     <string name="error_caretaker_name">Please insert your name</string>
     <string name="error_email">Please insert your email address</string>
     <string name="error_email_format">Please insert email address in correct format</string>
+    <string name="users_connected">SUCCESSFULLY CONNECTED WITH SENIOR!</string>
+    <string name="users_not_connected">PLEASE SCAN QR CODE ON SENIOR PHONE FIRST!</string>
     <string name="error_senior_name">Please insert senior\'s name</string>
     <string name="error_caretaker_dob">Please insert your date of birth</string>
     <string name="error_senior_dob">Please insert senior\'s date of birth</string>

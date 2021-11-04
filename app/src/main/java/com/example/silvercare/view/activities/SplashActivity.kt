@@ -5,18 +5,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.silvercare.R
-import com.example.silvercare.model.AuthAppRepository
 import com.example.silvercare.model.UserInformation
+import com.example.silvercare.utils.Constants
 import com.example.silvercare.viewmodel.LoginViewModel
-import com.google.api.AuthRequirement
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+    private lateinit var viewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        viewModel =  ViewModelProvider(this).get(LoginViewModel::class.java)
+        val currentUser = FirebaseAuth.getInstance().currentUser
 
+        if (currentUser!= null) {
+            viewModel.checkIfProfileIsCompleted(currentUser, Constants.CARETAKERS)
+            viewModel.checkIfProfileIsCompleted(currentUser, Constants.USERS)
+        }
         // This is used to hide the status bar and make the splash screen as a full screen activity.
         // It is deprecated in the API level 30. I will update you with the alternate solution soon.
         window.setFlags(
@@ -34,9 +45,8 @@ class SplashActivity : AppCompatActivity() {
                 // If user is not logged in or logout manually then user will  be redirected to the Login screen as usual.
 
                 // Get the current logged in user id
-                val currentUserID = UserInformation().getCurrentUserID()
 
-                if (currentUserID.isNotEmpty()) {
+                if (viewModel.isProfileCompleted.value == true) {
                     // Launch dashboard screen.
                     startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
                 } else {

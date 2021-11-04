@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.silvercare.databinding.FragmentQrCodeScannerBinding
+import com.example.silvercare.utils.Constants
 import com.example.silvercare.view.activities.HomeActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.example.silvercare.viewmodel.QrCodeScanerViewModel
@@ -140,6 +142,11 @@ class QrCodeScannerFragment : Fragment() {
                             loginViewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                                 taskId?.let {
                                     loginViewModel.fetchSeniorUser(taskId, rawValue!!)
+                                }
+                            })
+                            loginViewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
+                                taskId?.let {
+                                    loginViewModel.updateIsProfileCompleted(taskId,Constants.USERS)
                                 }
                             })
                             val intent = Intent(requireContext(), HomeActivity::class.java)

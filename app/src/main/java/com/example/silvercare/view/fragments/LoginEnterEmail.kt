@@ -14,6 +14,8 @@ import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentLoginEnterEmailBinding
 import com.example.silvercare.databinding.LoginShowQrcodeBinding
 import com.example.silvercare.utils.BaseActivity
+import com.example.silvercare.utils.Constants
+import com.example.silvercare.utils.Utils
 import com.example.silvercare.view.activities.HomeActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import java.util.regex.Pattern
@@ -43,6 +45,7 @@ class LoginEnterEmail : BaseActivity() {
                 viewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                     taskId?.let {
                         viewModel.insertEmail(taskId)
+                        viewModel.updateIsProfileCompleted(taskId, Constants.CARETAKERS)
                     }
                 })
                 val intent = Intent(requireContext(), HomeActivity::class.java)
