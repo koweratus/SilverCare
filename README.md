@@ -1,6 +1,17 @@
 # SilverCare
 App designed to help elderly people and their youngins
 
+HOW TO USE THE APP:
+
+Android users: 
+  -> simply download .apk file provided in repository
+ 
+Iphone users:
+  Download Android emulator of your choice (preferably BlueStacks). 
+
+
+
+
 Login desing.
 
 
