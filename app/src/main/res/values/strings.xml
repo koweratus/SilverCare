@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">SilverCare</string>
+    <string name="tv_camera">Camera</string>
+    <string name="lbl_gallery">Gallery</string>
+    <string name="title_select_image_action">Select Image Action</string>
+
+    <string name="content_description">image</string>
+    <string name="txt_enter_mob_no">Enter Mobile Number</string>
+    <string name="txt_search">Search</string>
+    <string name="txt_enter_otp">Enter the code sent to </string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="et_dob">Enter your Date Of Birth</string>
+    <string name="caretaker">Caretaker</string>
+    <string name="senior">Senior</string>
+    <string name="continues">Continue</string>
+    <string name="finish">Finish</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="would_you_like_to_receive_newsletter">Would you like to receive newsletter</string>
+    <string name="qr_code">qr_code</string>
+    <string name="enter_your_info">Enter your info</string>
+    <string name="generate_qr_code">Generate QR Code</string>
+    <string name="haven_t_receive_yet">Haven\'t receive yet?</string>
+    <string name="caretaker_name">Caretaker name</string>
+    <string name="senior_name">Senior Name</string>
+    <string name="enter_senior_date_of_birth">Enter Senior Date of Birth</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="logout">Logout</string>
+    <string name="how_do_you_plan_to_use_the_application">What type of user are you?</string>
+    <string name="error_caretaker_name">Please insert your name</string>
+    <string name="error_email">Please insert your email address</string>
+    <string name="error_email_format">Please insert email address in correct format</string>
+    <string name="users_connected">SUCCESSFULLY CONNECTED WITH SENIOR!</string>
+    <string name="users_not_connected">PLEASE SCAN QR CODE ON SENIOR PHONE FIRST!</string>
+    <string name="error_senior_name">Please insert senior\'s name</string>
+    <string name="error_caretaker_dob">Please insert your date of birth</string>
+    <string name="error_senior_dob">Please insert senior\'s date of birth</string>
+    <string name="error_personal_information">Please enter information in all fields</string>
+    <string name="error_qr_code">PLEASE CONNECT WITH SENIOR FIRST!</string>
+    <string name="success_qr_code">SUCCESSFULLY CONNECTED WITH SENIOR!</string>
+
+</resources>

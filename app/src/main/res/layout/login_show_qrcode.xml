@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.silvercare.viewmodel.LoginViewModel" />
+    </data>
+
+
+        <LinearLayout
+            android:id="@+id/ll_finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".view.fragments.LoginShowQrCode">
+
+        <FrameLayout
+                android:id="@+id/fl_header_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/auth_header_image_height">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/content_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/auth_screens_background" />
+
+                <ImageView
+                    android:layout_width="@dimen/auth_logo_width_size"
+                    android:layout_height="@dimen/auth_logo_height_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo_silvercare"
+                    />
+
+            </FrameLayout>
+            <ImageView
+                android:id="@+id/idIVQrcode"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:contentDescription="@string/qr_code" />
+
+            <!--Button for creating a QR code-->
+            <com.example.silvercare.utils.SCButton
+                android:id="@+id/btn_continue_to_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="16dp"
+                android:paddingTop="@dimen/btn_padding"
+                android:paddingBottom="@dimen/btn_padding"
+                android:text="@string/continues"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_textSize" />
+
+        </LinearLayout>
+
+</layout>

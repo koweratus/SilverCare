@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.silvercare.viewmodel.LoginViewModel" />
+    </data>
+
+
+    <LinearLayout
+        style="@style/VView"
+        android:layout_marginBottom="50dp">
+        <FrameLayout
+            android:id="@+id/fl_header_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_header_image_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitXY"
+                android:src="@drawable/auth_screens_background" />
+
+            <ImageView
+                android:layout_width="@dimen/auth_logo_width_size"
+                android:layout_height="@dimen/auth_logo_height_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_silvercare"
+                />
+        </FrameLayout>
+
+        <LinearLayout
+            style="@style/LView"
+            android:padding="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center">
+
+            <com.example.silvercare.utils.SCTextView
+              android:background="@drawable/drawable_text_view_border"
+                android:id="@+id/txt_country_code"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="@{viewmodel.country.noCode}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/title_textSize"
+                app:drawableEndCompat="@drawable/ic_arrow_down" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_enter_mob_no"
+                android:textColorHint="@color/colorSecondaryText">
+
+                <com.example.silvercare.utils.SCEditText
+                    android:id="@+id/edt_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="phone"
+                    android:text="@={viewmodel.mobile}"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/title_textSize" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.example.silvercare.utils.SCButton
+            android:id="@+id/btn_get_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="16dp"
+            android:paddingTop="@dimen/btn_padding"
+            android:paddingBottom="@dimen/btn_padding"
+            android:text="@string/continues"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/btn_textSize" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,122 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="CustomToolBar">
+        <item name="android:id">@id/toolbar</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="background">?attr/colorPrimary</item>
+        <item name="elevation">4dp</item>
+        <item name="titleTextColor">@color/colorWhite</item>
+        <item name="theme">@style/ToolbarColoredBackArrow</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="FView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="VView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <style name="WView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="LView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LWView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="BtnStyle" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_btn_bg</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="TxtRgStyle" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TxtSemiStyle" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="EdtOTPStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/shape_edit_bg</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+    </style>
+
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="customDatePickerStyle" parent="AlertDialogTheme">
+        <item name="android:datePickerStyle">@style/customDatePicker</item>
+    </style>
+
+    <style name="customDatePicker" parent="AlertDialogTheme">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#f00</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#00f</item>
+    </style>
+
+</resources>

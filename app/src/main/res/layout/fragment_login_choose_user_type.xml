@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.silvercare.viewmodel.LoginViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragments.LoginChooseUserTypeFragment">
+
+
+        <FrameLayout
+            android:id="@+id/fl_header_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auth_header_image_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitXY"
+                android:src="@drawable/auth_screens_background" />
+
+            <ImageView
+                android:layout_width="@dimen/auth_logo_width_size"
+                android:layout_height="@dimen/auth_logo_height_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_silvercare" />
+        </FrameLayout>
+
+        <com.example.silvercare.utils.SCTextView
+            style="@style/TxtRgStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/tv_otp_margin_bottom"
+            android:layout_marginTop="50dp"
+            android:padding="16dp"
+            android:textStyle="bold"
+            android:text="@string/how_do_you_plan_to_use_the_application" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_radio_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <com.example.silvercare.utils.SCRadioButton
+                    android:id="@+id/radio_caretaker"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/profile_radio_button_marginStartEnd"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_user_type_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/caretaker"
+                    android:textColor="@drawable/drawable_user_type_text_color_selector"
+                    android:textStyle="bold"  />
+
+                <com.example.silvercare.utils.SCRadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/profile_radio_button_marginStartEnd"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_user_type_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/senior"
+                    android:textColor="@drawable/drawable_user_type_text_color_selector"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <com.example.silvercare.utils.SCButton
+                android:id="@+id/btn_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingTop="@dimen/btn_padding"
+                android:paddingBottom="@dimen/btn_padding"
+android:padding="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_textSize"
+                android:text="@string/continues" />
+
+
+        </LinearLayout>
+
+
+</layout>
