@@ -4,11 +4,13 @@ App designed to help elderly people and their youngins
 HOW TO USE THE APP:
 
 Android users: 
-  -> simply download .apk file provided in repository
+  1) Simply download .apk file provided in this repository
  
 Iphone users:
-  Download Android emulator of your choice (preferably BlueStacks). 
-
+  1) Download .apk file from this repository.
+  2) Download Android emulator of your choice (preferably BlueStacks). 
+  3) Once you have downloaded BlueStacks, press on Install Apk on right toolbar and choose .apk file you downloaded from this repository.
+  4) Run the app.
 
 
 
