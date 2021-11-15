@@ -38,10 +38,7 @@
     <string name="error_caretaker_dob">Please insert your date of birth</string>
     <string name="error_senior_dob">Please insert senior\'s date of birth</string>
     <string name="error_personal_information">Please enter information in all fields</string>
-<<<<<<< HEAD
     <string name="error_qr_code">PLEASE CONNECT WITH SENIOR FIRST!</string>
     <string name="success_qr_code">SUCCESSFULLY CONNECTED WITH SENIOR!</string>
-=======
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
 
 </resources>

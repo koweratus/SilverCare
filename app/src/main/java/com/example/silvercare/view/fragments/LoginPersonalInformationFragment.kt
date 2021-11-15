@@ -50,7 +50,6 @@ class LoginPersonalInformationFragment : BaseActivity() {
         c.getActualMaximum(Calendar.DAY_OF_MONTH)
         c.getActualMaximum(Calendar.MONTH)*/
         val currentYear = c.get(Calendar.YEAR) - 18
-<<<<<<< HEAD
         c.set(currentYear, 11, 31)
         cMin.set(1929, 11, 31)
         binding.viewmodel = viewModel
@@ -74,27 +73,6 @@ class LoginPersonalInformationFragment : BaseActivity() {
             selectDateForCaretaker()
         }
 
-=======
-        c.set(currentYear ,11,31)
-        cMin.set(1929,11,31)
-        binding.viewmodel = viewModel
-        binding.etDatePickerSenior.setOnClickListener{
-            selectDateForSenior()
-        }
-        binding.etDatePickerCaretaker.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus){
-                selectDateForCaretaker()
-            }
-        }
-        binding.etDatePickerCaretaker.setOnClickListener{
-            selectDateForCaretaker()
-        }
-        binding.etDatePickerSenior.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus){
-                selectDateForSenior()
-            }
-        }
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
         binding.btnFinish.setOnClickListener {
             if (validatePersonalInformationDetails()) {
                 findNavController().navigate(R.id.loginShowQrCode)
@@ -102,11 +80,7 @@ class LoginPersonalInformationFragment : BaseActivity() {
 
             } else {
                 validatePersonalInformationDetails()
-<<<<<<< HEAD
                 //  showErrorSnackBar(resources.getString(R.string.error_personal_information), true,requireActivity())
-=======
-              //  showErrorSnackBar(resources.getString(R.string.error_personal_information), true,requireActivity())
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
 
             }
         }
@@ -128,45 +102,29 @@ class LoginPersonalInformationFragment : BaseActivity() {
             c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)
         ).apply {
             datePicker.maxDate = c.timeInMillis
-<<<<<<< HEAD
             datePicker.minDate = cMin.timeInMillis
         }.show()
-=======
-        datePicker.minDate = cMin.timeInMillis }.show()
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
 
     }
 
     private fun selectDateForCaretaker() {
         DatePickerDialog(
-<<<<<<< HEAD
-            requireContext(), R.style.customDatePickerStyle,
-            { datePicker, yy, mm, dd ->
-=======
             requireContext(), R.style.customDatePickerStyle, { datePicker, yy, mm, dd ->
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                 var dtC = "$dd/${mm + 1}/$yy"
                 binding.etDatePickerCaretaker.setText(dtC)
             },
             c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH),
 
-<<<<<<< HEAD
             ).apply {
             datePicker.maxDate = c.timeInMillis
             datePicker.minDate = cMin.timeInMillis
         }.show()
-=======
-        ).apply {
-            datePicker.maxDate = c.timeInMillis
-            datePicker.minDate = cMin.timeInMillis }.show()
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
 
     }
 
     private fun validatePersonalInformationDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etProfileName.text.toString().trim { it <= ' ' }) -> {
-<<<<<<< HEAD
                 showErrorSnackBar(
                     resources.getString(R.string.error_caretaker_name),
                     true,
@@ -180,39 +138,24 @@ class LoginPersonalInformationFragment : BaseActivity() {
                     true,
                     requireActivity()
                 )
-=======
-                showErrorSnackBar(resources.getString(R.string.error_caretaker_name), true,requireActivity())
-                false
-            }
-            TextUtils.isEmpty(binding.etDatePickerCaretaker.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.error_caretaker_dob), true,requireActivity())
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                 false
             }
 
             TextUtils.isEmpty(binding.etSeniorName.text.toString().trim { it <= ' ' }) -> {
-<<<<<<< HEAD
                 showErrorSnackBar(
                     resources.getString(R.string.error_senior_name),
                     true,
                     requireActivity()
                 )
-=======
-                showErrorSnackBar(resources.getString(R.string.error_senior_name), true,requireActivity())
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                 false
             }
 
             TextUtils.isEmpty(binding.etDatePickerSenior.text.toString().trim { it <= ' ' }) -> {
-<<<<<<< HEAD
                 showErrorSnackBar(
                     resources.getString(R.string.error_senior_dob),
                     true,
                     requireActivity()
                 )
-=======
-                showErrorSnackBar(resources.getString(R.string.error_senior_dob), true,requireActivity())
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                 false
             }
 

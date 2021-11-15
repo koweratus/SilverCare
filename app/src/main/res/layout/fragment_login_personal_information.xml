@@ -85,16 +85,9 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-<<<<<<< HEAD
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-=======
-                android:padding="16dp"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                 android:hint="@string/senior_name"
                 android:textColorHint="@color/colorSecondaryText">
 
@@ -103,11 +96,6 @@
                     android:layout_width="match_parent"
                     android:inputType="text"
                     android:maxLines="1"
-<<<<<<< HEAD
-=======
-                    android:focusableInTouchMode="true"
-                    android:focusable="true"
->>>>>>> 5995829ebe2a1f3b8a2c32684b52e223815f3812
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/title_textSize" />
