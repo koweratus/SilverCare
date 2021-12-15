@@ -12,11 +12,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.silvercare.R
 import com.example.silvercare.databinding.FragmentHomeBinding
+import com.example.silvercare.model.Caretaker
+import com.example.silvercare.model.User
 import com.example.silvercare.utils.Constants
 import com.example.silvercare.view.activities.MainActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
 
@@ -42,7 +45,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogOut.setOnClickListener {
+      /*  binding.btnLogOut.setOnClickListener {
             findNavController().navigate(R.id.action_FHome_to_FLogin)
         }
         checkUser()
@@ -55,15 +58,18 @@ class HomeFragment : Fragment() {
             })
             fAuth.signOut()
             checkUser()
-        }
+        }*/
     }
 
 
     private fun checkUser() {
         val sharedPreferences =
-            this.getActivity()
-                ?.getSharedPreferences(Constants.MYSHOPPAL_PREFERENCES, Context.MODE_PRIVATE)
-        val username = sharedPreferences?.getString(Constants.LOGGED_IN_USERNAME, "")!!
+            this.activity
+                ?.getSharedPreferences(Constants.SILVERCARE_PREFERENCES, Context.MODE_PRIVATE)
+        val email = sharedPreferences?.getString(Constants.CARETAKER_EMAIL, "")!!
+        val gson = Gson()
+        val json = sharedPreferences.getString(Constants.CARETAKER_DETAILS, "")
+        val user = gson.fromJson(json, Caretaker ::class.java)
         //get current user
         val firebaseUser = fAuth.currentUser
         if (firebaseUser == null) {
@@ -78,7 +84,7 @@ class HomeFragment : Fragment() {
         } else {
             //logged in
             binding.userId = fAuth.currentUser!!.uid
-            binding.mobile = username
+            binding.mobile = user.email
         }
     }
 

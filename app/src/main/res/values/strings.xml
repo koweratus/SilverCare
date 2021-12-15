@@ -12,6 +12,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Settings</string>
     <string name="et_dob">Enter your Date Of Birth</string>
     <string name="caretaker">Caretaker</string>
     <string name="senior">Senior</string>
@@ -40,5 +41,20 @@
     <string name="error_personal_information">Please enter information in all fields</string>
     <string name="error_qr_code">PLEASE CONNECT WITH SENIOR FIRST!</string>
     <string name="success_qr_code">SUCCESSFULLY CONNECTED WITH SENIOR!</string>
+    <!-- Preference Titles -->
+    <string name="profile_header">Profile</string>
+    <string name="preferences_header">Preferences</string>
+
+    <!-- Messages Preferences -->
+    <string name="profile_title">Edit profile</string>
+
+    <!-- Sync Preferences -->
+    <string name="pill_title">Receive "Senior taken a pill" notification</string>
+    <string name="senior_title">Receive "Senior has fallen" notification</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="edit_profile_settings">Edit your profile setting</string>
 
 </resources>

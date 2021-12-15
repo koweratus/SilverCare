@@ -25,10 +25,6 @@ import com.google.zxing.WriterException
 
 class LoginShowQrCode : BaseActivity() {
 
-    private var seniorName: String? = null
-    private var caretakerName: String? = null
-    private var seniorDob: String? = null
-
     private lateinit var binding: LoginShowQrcodeBinding
     private val viewModel by activityViewModels<LoginViewModel>()
 

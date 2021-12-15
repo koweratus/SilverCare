@@ -141,6 +141,7 @@ class QrCodeScannerFragment : Fragment() {
                         Barcode.TYPE_TEXT -> {
                             loginViewModel.getTaskResult().observe(viewLifecycleOwner, { taskId ->
                                 taskId?.let {
+                                    val type = loginViewModel.type.value
                                     loginViewModel.fetchSeniorUser(taskId, rawValue!!)
                                 }
                                 val intent = Intent(requireContext(), HomeActivity::class.java)

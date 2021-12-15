@@ -40,4 +40,12 @@
         android:name="com.example.silvercare.view.activities.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.silvercare.view.fragments.SettingsFragment"
+        android:label="@string/title_settings"/>
+
+    <action android:id="@+id/open_settings_fragment"
+        app:destination="@id/navigation_settings"/>
 </navigation>

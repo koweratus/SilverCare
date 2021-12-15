@@ -27,6 +27,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
 import javax.inject.Inject
+import com.google.gson.Gson
+
+
+
 
 @HiltViewModel
 class LoginViewModel @Inject
@@ -220,18 +224,20 @@ constructor(
 
     fun insertEmail(taskId: Task<AuthResult>) {
         val firebaseUser: FirebaseUser = taskId.result.user!!
-
-
         val db = FirebaseFirestore.getInstance()
         val noteRef = db.collection(Constants.CARETAKERS).document(firebaseUser.uid.toString())
-        noteRef.update("email", email.value.toString()).addOnSuccessListener {
-            setVProgress(false)
-            progress.value = false
-        }.addOnFailureListener { e ->
-            setVProgress(false)
-            progress.value = false
-            Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
-        }
+
+        noteRef.update("email", email.value.toString())
+
+        val caretaker = Caretaker(
+            username = caretakerName.value.toString(),
+            mobile = mobile.value.toString(),
+            email = email.value.toString(),
+            dob = caretakerDob.value.toString()
+        )
+
+        getCaretakerDetails(caretaker)
+
     }
 
     fun fetchUser(taskId: Task<AuthResult>, type: Boolean) {
@@ -259,14 +265,14 @@ constructor(
                         // START
                         val sharedPreferences =
                             activity.getSharedPreferences(
-                                Constants.MYSHOPPAL_PREFERENCES,
+                                Constants.SILVERCARE_PREFERENCES,
                                 Context.MODE_PRIVATE
                             )
 
                         // Create an instance of the editor which is help us to edit the SharedPreference.
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()
                         editor.putString(
-                            Constants.LOGGED_IN_USERNAME,
+                            Constants.USER_DETAILS,
                             "${user.username} ${user.mobile}"
                         )
                         editor.apply()
@@ -296,25 +302,7 @@ constructor(
                 .addOnSuccessListener { data ->
                     setVProgress(false)
                     progress.value = false
-                    //if (data.exists()) {  //already created user
-                    //save profile in preference
-                    // START
-                    val sharedPreferences =
-                        activity.getSharedPreferences(
-                            Constants.MYSHOPPAL_PREFERENCES,
-                            Context.MODE_PRIVATE
-                        )
 
-                    // Create an instance of the editor which is help us to edit the SharedPreference.
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putString(
-                        Constants.LOGGED_IN_USERNAME,
-                        "${user.username} ${user.mobile}"
-                    )
-                    editor.apply()
-                    // END
-
-                    // }
                     userProfileGot.value = firebaseUser.uid
                 }.addOnFailureListener { e ->
                     setVProgress(false)
@@ -368,7 +356,8 @@ constructor(
             Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-    fun checkIfProfileIsCompleted(taskId: FirebaseUser?,type: String) {
+
+    fun checkIfProfileIsCompleted(taskId: FirebaseUser?, type: String) {
         val db = FirebaseFirestore.getInstance()
         db.collection(type).document(taskId?.uid!!).get()
             .addOnSuccessListener { documentSnapshot ->
@@ -381,6 +370,7 @@ constructor(
                 Toast.makeText(context, R.string.users_not_connected, Toast.LENGTH_SHORT).show()
             }
     }
+
     fun fetchSeniorUser(taskId: Task<AuthResult>, name: String) {
         val firebaseUser: FirebaseUser = taskId.result.user!!
         val fname: String = name.split(";")[0]
@@ -407,31 +397,16 @@ constructor(
             .addOnSuccessListener { data ->
                 setVProgress(false)
                 progress.value = false
-                //if (data.exists()) {  //already created user
-                //save profile in preference
-                // START
-                val sharedPreferences =
-                    activity.getSharedPreferences(
-                        Constants.MYSHOPPAL_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
 
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    "${user.username} ${user.mobile}"
-                )
-                editor.apply()
-                // END
-
-                // }
                 userProfileGot.value = firebaseUser.uid
             }.addOnFailureListener { e ->
                 setVProgress(false)
                 progress.value = false
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
             }
+
+        // Save preferences
+        getUserDetails(user)
 
         val caretaker = Caretaker(
             id = id,
@@ -471,44 +446,70 @@ constructor(
         return currentUserID
     }
 
-    fun getUserDetails(activity: Activity) {
-        this.activity = activity
-        // Here we pass the collection name from which we wants the data.
-        fireStore.collection(Constants.USERS)
-            // The document id to get the Fields of user.
-            .document(getCurrentUserID())
-            .get()
-            .addOnSuccessListener { document ->
+    private fun getUserDetails(user : User) {
+        //save profile in preference
+        // START
+        val sharedPreferences =
+            activity.getSharedPreferences(
+                Constants.SILVERCARE_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
 
-
-                // Here we have received the document snapshot which is converted into the User Data model object.
-                val user = document.toObject(User::class.java)!!
-
-                val sharedPreferences =
-                    activity.getSharedPreferences(
-                        Constants.MYSHOPPAL_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
-
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    "${user.username} ${user.mobile}"
-                )
-                editor.apply()
-
-
-            }
-            .addOnFailureListener { e ->
-                // Hide the progress dialog if there is any error. And print the error in log.
-                setVProgress(false)
-                progress.value = false
-                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
-            }
+        // Create an instance of the editor which is help us to edit the SharedPreference.
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(user)
+        editor.putString(
+            Constants.USER_DETAILS,
+            json
+        )
+        editor.apply()
+        // END
 
     }
 
+    private fun getCaretakerDetails(caretaker : Caretaker) {
+        //save profile in preference
+        // START
+        val sharedPreferences =
+            activity.getSharedPreferences(
+                Constants.SILVERCARE_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+
+        // Create an instance of the editor which is help us to edit the SharedPreference.
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(caretaker)
+        editor.putString(
+            Constants.CARETAKER_DETAILS,
+            json
+        )
+        editor.apply()
+        // END
+
+    }
+
+    private fun getCaretakerEmail(email : String) {
+        //save profile in preference
+        // START
+        val sharedPreferences =
+            activity.getSharedPreferences(
+                Constants.SILVERCARE_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+
+        // Create an instance of the editor which is help us to edit the SharedPreference.
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        editor.putString(
+            Constants.CARETAKER_EMAIL,
+            email
+        )
+        editor.apply()
+        // END
+
+    }
     fun clearAll() {
         userProfileGot.value = null
         authRepo.clearOldAuth()

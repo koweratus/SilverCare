@@ -9,8 +9,10 @@ object Constants {
 
     // TODO Step 1: Create a constant variables for Android SharedPreferences and Username Key.
     // START
-    const val MYSHOPPAL_PREFERENCES: String = "SilverCare"
-    const val LOGGED_IN_USERNAME: String = "logged_in_username"
+    const val SILVERCARE_PREFERENCES: String = "SilverCare"
+    const val USER_DETAILS: String = "user_details"
+    const val CARETAKER_DETAILS: String = "caretaker_details"
+    const val CARETAKER_EMAIL: String = "caretaker_email"
     // END
 
 }
