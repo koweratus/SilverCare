@@ -11,12 +11,12 @@
     <color name="colorPrimaryLt">#615C5585</color>
     <color name="colorDefaultBg">#f8f9fa</color>
 
-    <color name="colorPrimary">#005EFF</color>
-    <color name="colorPrimaryDark">#222934</color>
-    <color name="colorAccent">#2154ED</color>
+    <color name="colorPrimary">#0096c7</color>
+    <color name="colorPrimaryDark">#03045e</color>
+    <color name="colorAccent">#023e8a</color>
 
-    <color name="colorThemeBrightBlue">#00EAFF</color>
-    <color name="colorThemeBlue">#0048FF</color>
+    <color name="colorThemeBrightBlue">#00b4d8</color>
+    <color name="colorThemeBlue">#0096c7</color>
 
     <color name="colorPrimaryText">#222934</color>
     <color name="colorSecondaryText">#989898</color>
@@ -24,7 +24,7 @@
     <color name="colorWhite">#FFFFFF</color>
 
     <color name="colorSnackBarSuccess">#8BC34A</color>
-    <color name="colorSnackBarError">#F72400</color>
+    <color name="colorSnackBarError">#ff5400</color>
 
     <color name="colorLightGrey">#F1F1F1</color>
 

@@ -246,7 +246,7 @@ constructor(
         if (type) {
             val user = Caretaker(
                 firebaseUser.uid,
-                mobile.value.toString(),
+                mobile = mobile.value.toString(),
                 email = email.value.toString(),
                 profileCompleted = false
             )
@@ -291,7 +291,7 @@ constructor(
         } else {
             val user = User(
                 firebaseUser.uid,
-                mobile.value.toString(),
+                mobile = mobile.value.toString(),
                 profileCompleted = false
 
             )

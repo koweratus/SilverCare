@@ -9,51 +9,178 @@
             name="mobile"
             type="String" />
     </data>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.example.silvercare.utils.SCTextViewBold
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginBottom="@dimen/tv_otp_margin_bottom"
+        android:textStyle="bold"
+        android:text="Welcome, mate!"/>
+
+    <com.example.silvercare.utils.SCTextView
+        style="@style/TxtRgStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="@dimen/tv_otp_margin_bottom"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:text="You are currently monitoring:" />
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
+        android:layout_height="170dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/dashboard"/>
-     <!--   <LinearLayout
-            style="@style/VView"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center">
-
-            <com.example.silvercare.utils.SCTextView
-                android:id="@+id/txt_uid"
-                style="@style/TxtRgStyle"
-                android:text="@{userId}" />
-
-            <com.example.silvercare.utils.SCTextView
-                android:id="@+id/txt_number"
-                style="@style/TxtRgStyle"
-                android:text="@{mobile}" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/button_background">
 
 
-            <com.example.silvercare.utils.SCButton
-                android:id="@+id/btn_log_out"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/button_background"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:padding="16dp"
-                android:paddingTop="@dimen/btn_padding"
-                android:paddingBottom="@dimen/btn_padding"
-                android:text="@string/logout"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/btn_textSize" />
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    </LinearLayout>
-</layout>
+                    <TextView
+                        android:id="@+id/tv_name_of_caretaker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jadranka Kosor"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Senior"
+                        android:textSize="16sp"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:text="26/04/1997"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_camera"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.example.silvercare.utils.SCButton
+                        android:id="@+id/btn_reminder_pill"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_cardview"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="16dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/btn_padding"
+                        android:paddingBottom="@dimen/btn_padding"
+                        android:text="@string/pill_reminder"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/btn_textSize" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+
+    </layout>
+    <!--
+    <LinearLayout
+           style="@style/VView"
+           android:gravity="center_horizontal"
+           android:layout_gravity="center">
+
+           <com.example.silvercare.utils.SCTextView
+               android:id="@+id/txt_uid"
+               style="@style/TxtRgStyle"
+               android:text="@{userId}" />
+
+           <com.example.silvercare.utils.SCTextView
+               android:id="@+id/txt_number"
+               style="@style/TxtRgStyle"
+               android:text="@{mobile}" />
+
+
+           <com.example.silvercare.utils.SCButton
+               android:id="@+id/btn_log_out"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="30dp"
+               android:layout_marginEnd="16dp"
+               android:background="@drawable/button_background"
+               android:foreground="?attr/selectableItemBackground"
+               android:gravity="center"
+               android:padding="16dp"
+               android:paddingTop="@dimen/btn_padding"
+               android:paddingBottom="@dimen/btn_padding"
+               android:text="@string/logout"
+               android:textColor="@android:color/white"
+               android:textSize="@dimen/btn_textSize" />
+
+       </LinearLayout>-->
