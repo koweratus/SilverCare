@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,7 +20,15 @@ import com.example.silvercare.view.activities.MainActivity
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +37,8 @@ class HomeFragment : Fragment() {
     private lateinit var fStore: FirebaseFirestore
     private val viewModel by activityViewModels<LoginViewModel>()
     val args by navArgs<HomeFragmentArgs>()
+
+    private val userCollectionReference = Firebase.firestore.collection(Constants.USERS)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +55,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        retrieveUser()
       /*  binding.btnLogOut.setOnClickListener {
             findNavController().navigate(R.id.action_FHome_to_FLogin)
         }
@@ -86,6 +97,37 @@ class HomeFragment : Fragment() {
             binding.userId = fAuth.currentUser!!.uid
             binding.mobile = user.email
         }
+    }
+
+    private fun retrieveUser() = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val sharedPreferences =
+                requireActivity().getSharedPreferences(Constants.SILVERCARE_PREFERENCES, Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPreferences.getString(Constants.CARETAKER_DETAILS, "")
+            val user = gson.fromJson(json, Caretaker ::class.java)
+
+            val querySnapshot = userCollectionReference.get().await()
+            val sb = StringBuilder()
+            for(document in querySnapshot.documents) {
+                val person = document.toObject<User>()
+                sb.append("$person\n")
+
+            }
+            withContext(Dispatchers.Main) {
+                if (sb.toString().split("=", ",")[11] == FirebaseAuth.getInstance().currentUser!!.uid) {
+                    binding.tvDobOfSenior.text = sb.toString().split("=", ",")[5]
+                    binding.tvNameOfSenior.text = sb.toString().split("=", ",")[3]
+                    binding.tvWelcome.text =  getString(R.string.welcome, user.username)
+                }
+            }
+        } catch(e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(requireActivity(), e.message, Toast.LENGTH_LONG).show()
+            }
+        }
+
+
     }
 
 }

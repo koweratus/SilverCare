@@ -17,13 +17,14 @@
     android:orientation="vertical">
 
     <com.example.silvercare.utils.SCTextViewBold
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_marginBottom="@dimen/tv_otp_margin_bottom"
         android:textStyle="bold"
-        android:text="Welcome, mate!"/>
+        android:text="@string/welcome"/>
 
     <com.example.silvercare.utils.SCTextView
         style="@style/TxtRgStyle"
@@ -36,7 +37,7 @@
         android:layout_marginBottom="@dimen/tv_otp_margin_bottom"
         android:padding="16dp"
         android:textStyle="bold"
-        android:text="You are currently monitoring:" />
+        android:text="@string/you_are_currently_monitoring" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -68,7 +69,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_name_of_caretaker"
+                        android:id="@+id/tv_name_of_senior"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Jadranka Kosor"
@@ -82,6 +83,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_dob_of_senior"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
