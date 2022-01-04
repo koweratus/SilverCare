@@ -14,12 +14,14 @@
     <PreferenceCategory app:title="@string/preferences_header">
 
         <SwitchPreferenceCompat
-            app:key="preferences"
-            app:title="@string/pill_title" />
+            app:key="senior_pill_reminder_notification_preference"
+            app:title="@string/pill_title"
+            app:widgetLayout="@layout/switch_preference_layout"/>
 
         <SwitchPreferenceCompat
-
-            app:title="@string/senior_title" />
+            app:key="senior_fallen_notification_preference"
+            app:title="@string/senior_title"
+           />
 <!--            app:key="attachment"-->
 <!--           app:dependency="preferences"-->
 <!--            app:summaryOff="@string/attachment_summary_off"-->

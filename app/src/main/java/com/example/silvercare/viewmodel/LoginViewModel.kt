@@ -391,11 +391,10 @@ constructor(
             friend = id,
             mobile = mobile.value.toString(),
             profileCompleted = true
-
-
         )
+
         val db = FirebaseFirestore.getInstance()
-        val noteRef = db.collection(Constants.USERS).document(firebaseUser.uid.toString())
+        val noteRef = db.collection(Constants.USERS).document(firebaseUser.uid)
 
         noteRef.set(user, SetOptions.merge())
             .addOnSuccessListener { data ->
@@ -494,26 +493,6 @@ constructor(
 
     }
 
-    private fun getCaretakerEmail(email : String) {
-        //save profile in preference
-        // START
-        val sharedPreferences =
-            activity.getSharedPreferences(
-                Constants.SILVERCARE_PREFERENCES,
-                Context.MODE_PRIVATE
-            )
-
-        // Create an instance of the editor which is help us to edit the SharedPreference.
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-
-        editor.putString(
-            Constants.CARETAKER_EMAIL,
-            email
-        )
-        editor.apply()
-        // END
-
-    }
     fun clearAll() {
         userProfileGot.value = null
         authRepo.clearOldAuth()

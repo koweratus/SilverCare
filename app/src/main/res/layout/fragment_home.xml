@@ -40,12 +40,14 @@
         android:text="@string/you_are_currently_monitoring" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         app:cardCornerRadius="8dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,9 +128,9 @@
                         android:layout_width="250dp"
                         android:layout_height="250dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/button_cardview"
-                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/button_cardview"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:paddingTop="@dimen/btn_padding"

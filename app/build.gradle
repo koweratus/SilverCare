@@ -112,5 +112,7 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //tap target prompt
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:3.3.2'
 
 }

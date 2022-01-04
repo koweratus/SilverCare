@@ -62,6 +62,10 @@
         <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/fragment_notifications.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/fragment_qr_code_scanner.xml" value="0.2015625" />
         <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/progress_dialog.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/switch_fall_notification.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/switch_layout.xml" value="0.2" />
+        <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/layout/switch_preference_layout.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/koweratus/Downloads/StudentTim4-master/StudentTim4-master/app/src/main/res/xml/root_preferences.xml" value="0.2" />
       </map>
     </option>
   </component>
