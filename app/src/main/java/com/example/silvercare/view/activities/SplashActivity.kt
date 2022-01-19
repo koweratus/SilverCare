@@ -7,7 +7,6 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.silvercare.R
-import com.example.silvercare.model.UserInformation
 import com.example.silvercare.utils.Constants
 import com.example.silvercare.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth

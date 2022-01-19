@@ -11,5 +11,7 @@ data class User(
     val mobile: String = "",
     val image: String = "",
     val friend: String = "",
-    val profileCompleted: Boolean = false
+    val profileCompleted: Boolean = false,
+    val token: String = ""
 ) : Parcelable
+

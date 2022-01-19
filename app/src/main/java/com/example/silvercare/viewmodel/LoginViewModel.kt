@@ -426,6 +426,7 @@ constructor(
             .addOnSuccessListener { data ->
                 setVProgress(false)
                 progress.value = false
+                getCaretakerDetails(caretaker)
             }.addOnFailureListener { e ->
                 setVProgress(false)
                 progress.value = false

@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="8dp"
-                        android:text="26/04/1997"
+                        android:text="@string/default_dob"
                         android:textSize="16sp" />
 
                 </LinearLayout>

@@ -1,27 +1,18 @@
 package com.example.silvercare.view.activities
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Button
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.example.silvercare.R
 import com.example.silvercare.databinding.ActivityHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal
-import androidx.preference.SwitchPreferenceCompat
-import android.content.SharedPreferences
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 
 
 @AndroidEntryPoint
@@ -54,13 +45,13 @@ class HomeActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        //val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
-        //prefManager.edit().clear().apply()
+        val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
+        prefManager.edit().clear().apply()
         showHomeFragmentButton()
     }
 
     private fun showHomeFragmentButton() {
-        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         if (!prefManager.getBoolean("didShowPrompt", false))
             MaterialTapTargetPrompt.Builder(this)
                 .setTarget(R.id.navigation_home)
@@ -82,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showNotificationFragmentButton() {
-        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         MaterialTapTargetPrompt.Builder(this)
             .setTarget(R.id.navigation_notifications)
             .setPrimaryText("Here you will find your Notifications!")
@@ -104,7 +95,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showSettingsFragmentButton() {
-        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         MaterialTapTargetPrompt.Builder(this)
             .setTarget(R.id.navigation_settings)
             .setPrimaryText("Here you will find your Settings!")
@@ -124,7 +115,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showPillReminderPrompt() {
-        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         MaterialTapTargetPrompt.Builder(this)
             .setTarget(R.id.btn_reminder_pill)
             .setPrimaryText("This is Pill Reminding button!")

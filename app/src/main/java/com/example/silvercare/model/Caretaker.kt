@@ -12,5 +12,6 @@ data class Caretaker(
     val email: String = "",
     val friend: String = "",
     val image: String = "",
-    val profileCompleted: Boolean = false
+    val profileCompleted: Boolean = false,
+    val token: String = ""
 ) : Parcelable

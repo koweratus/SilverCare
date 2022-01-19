@@ -59,5 +59,8 @@
     <string name="pill_reminder">PILL REMINDER</string>
     <string name="welcome">Welcome, %1$s!</string>
     <string name="you_are_currently_monitoring">You are currently monitoring:</string>
+    <string name="pill_schedule_reminder">reminded you about your pill schedule</string>
+    <string name="pill_schedule_reminder_push" formatted="true">%1$s reminded you about your pill schedule</string>
+    <string name="default_dob">26/04/1997</string>
 
 </resources>
