@@ -10,12 +10,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.silvercare.R
+import com.example.silvercare.view.activities.HomeActivity
 import com.example.silvercare.view.fragments.HomeFragment
+import com.example.silvercare.viewmodel.HomeViewModel
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import hilt_aggregated_deps._com_example_silvercare_view_activities_HomeActivity_GeneratedInjector
 import kotlin.random.Random
 
 private const val CHANNEL_ID ="my_channel"
@@ -41,7 +45,7 @@ class FirebaseService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        val intent = Intent(this, HomeFragment::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
 
@@ -61,6 +65,7 @@ class FirebaseService : FirebaseMessagingService() {
             .build()
 
         notificationManager.notify(notificationID,notification)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

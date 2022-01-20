@@ -1,16 +1,20 @@
 package com.example.silvercare.view.activities.ui.notifications
 
 import android.app.Notification
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silvercare.R
 import com.example.silvercare.adapter.NotificationAdapter
 import com.example.silvercare.databinding.FragmentNotificationsBinding
+import com.example.silvercare.viewmodel.HomeViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,6 +29,7 @@ class NotificationsFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var notificationList : List<com.example.silvercare.model.Notification>? = null
     private var notificationAdapter: NotificationAdapter? =null
+    private val viewModel by activityViewModels<HomeViewModel>()
 
     private val binding get() = _binding!!
 
@@ -52,8 +57,9 @@ class NotificationsFragment : Fragment() {
     private fun readNotifications() {
         val notiRef = FirebaseDatabase.getInstance().reference.child("Notifications")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
-
+        var notificationCount = 0
         notiRef.addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     (notificationList as ArrayList<com.example.silvercare.model.Notification>).clear()

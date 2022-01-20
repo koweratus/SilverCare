@@ -30,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import org.w3c.dom.Text
 
 class NotificationAdapter(
     private val mContext: Context,
@@ -56,9 +57,9 @@ class NotificationAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notifcation = mNotification[position]
 
-        if(notifcation.getText().equals("started following you"))
+        if(notifcation.getText() == mContext.getString(R.string.pill_schedule_pill_drank))
         {
-            holder.text.text = "started following you"
+            holder.text.text = mContext.getString(R.string.pill_schedule_reminder)
         }else if(notifcation.getText() == mContext.getString(R.string.pill_schedule_reminder)){
             holder.text.text = mContext.getString(R.string.pill_schedule_reminder)
 
@@ -93,14 +94,12 @@ class NotificationAdapter(
     }
 
 
-    private fun retrieveUser(userName: TextView) = CoroutineScope(Dispatchers.IO).launch {
+    private fun retrieveUser(username: TextView) = CoroutineScope(Dispatchers.IO).launch {
         try {
 
             val sharedPreferences =
                 mActivity.getSharedPreferences(Constants.SILVERCARE_PREFERENCES, Context.MODE_PRIVATE)
-            val gson = Gson()
-            val json = sharedPreferences.getString(Constants.USER_DETAILS, "")
-            val user = gson.fromJson(json, User ::class.java)
+            val type = sharedPreferences.getString(Constants.USER_TYPE, "")
 
             val querySnapshot = Firebase.firestore.collection(Constants.CARETAKERS).get().await()
             val sb = StringBuilder()
@@ -109,9 +108,20 @@ class NotificationAdapter(
                 sb.append("$person\n")
 
             }
+            val querySnapashot = Firebase.firestore.collection(Constants.USERS).get().await()
+            val sba = StringBuilder()
+            for(document in querySnapashot.documents) {
+                val persona = document.toObject<User>()
+                sba.append("$persona\n")
+
+            }
             withContext(Dispatchers.Main) {
+                if (type=="User"){
                 if (sb.toString().split("=", ",")[11] == FirebaseAuth.getInstance().currentUser!!.uid) {
-                            userName.text = sb.toString().split("=", ",")[3]
+                            username.text = sb.toString().split("=", ",")[3]
+                }}
+                else{
+                    username.text = sba.toString().split("=", ",")[3]
                 }
             }
         } catch(e: Exception) {

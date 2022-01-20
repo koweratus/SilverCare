@@ -144,12 +144,12 @@ class QrCodeScannerFragment : Fragment() {
                                     val type = loginViewModel.type.value
                                     loginViewModel.fetchSeniorUser(taskId, rawValue!!)
                                 }
-                                val intent = Intent(requireContext(), HomeActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                startActivity(intent)
-                                activity?.finish()
-                            })
 
+                            })
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                            activity?.finish()
                         }
 
                     }

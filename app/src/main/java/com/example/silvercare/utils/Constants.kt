@@ -13,6 +13,8 @@ object Constants {
     const val USER_DETAILS: String = "user_details"
     const val CARETAKER_DETAILS: String = "caretaker_details"
     const val CARETAKER_EMAIL: String = "caretaker_email"
+    const val USER_TYPE: String = "user_type"
+
     // END
 
     const val BASE_URL = "https://fcm.googleapis.com"

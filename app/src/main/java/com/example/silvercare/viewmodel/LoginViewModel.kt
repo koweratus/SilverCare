@@ -276,8 +276,8 @@ constructor(
                         // Create an instance of the editor which is help us to edit the SharedPreference.
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()
                         editor.putString(
-                            Constants.USER_DETAILS,
-                            "${user.username} ${user.mobile}"
+                            Constants.USER_TYPE,
+                            "Caretaker"
                         )
                         editor.apply()
                         // END
@@ -306,7 +306,21 @@ constructor(
                 .addOnSuccessListener { data ->
                     setVProgress(false)
                     progress.value = false
+                    // START
+                    val sharedPreferences =
+                        activity.getSharedPreferences(
+                            Constants.SILVERCARE_PREFERENCES,
+                            Context.MODE_PRIVATE
+                        )
 
+                    // Create an instance of the editor which is help us to edit the SharedPreference.
+                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                    editor.putString(
+                        Constants.USER_TYPE,
+                        "User"
+                    )
+                    editor.apply()
+                    // END
                     userProfileGot.value = firebaseUser.uid
                 }.addOnFailureListener { e ->
                     setVProgress(false)

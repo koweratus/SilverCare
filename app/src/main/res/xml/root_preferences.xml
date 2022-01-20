@@ -30,4 +30,9 @@
 
     </PreferenceCategory>
 
+    <Preference
+        app:key="logout"
+        app:title="@string/logout"
+        app:summary="@string/logout_summary"
+        app:useSimpleSummaryProvider="true" />
 </PreferenceScreen>

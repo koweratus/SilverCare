@@ -57,10 +57,14 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="edit_profile_settings">Edit your profile setting</string>
     <string name="pill_reminder">PILL REMINDER</string>
+    <string name="pill_drank">PILL DRANK</string>
     <string name="welcome">Welcome, %1$s!</string>
     <string name="you_are_currently_monitoring">You are currently monitoring:</string>
     <string name="pill_schedule_reminder">reminded you about your pill schedule</string>
     <string name="pill_schedule_reminder_push" formatted="true">%1$s reminded you about your pill schedule</string>
+    <string name="pill_schedule_pill_drank_push" formatted="true">%1$s has drank the pill</string>
+    <string name="pill_schedule_pill_drank" formatted="true">has drank the pill</string>
     <string name="default_dob">26/04/1997</string>
+    <string name="logout_summary">Logout of your account</string>
 
 </resources>
