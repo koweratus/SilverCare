@@ -41,12 +41,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var navView: BottomNavigationView
-    private var firebaseUser: FirebaseUser? = null
-    private val viewModel by viewModels<HomeViewModel>()
-    private var count: Int = 1
     val TAG = "HomeActivity"
-    private val userCollectionReference = FirebaseFirestore.getInstance().collection(Constants.USERS)
-    private val caretakerCollectionReference = FirebaseFirestore.getInstance().collection(Constants.CARETAKERS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,150 +72,8 @@ class HomeActivity : AppCompatActivity() {
         val prefManager = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         prefManager.edit().clear().apply()
         showHomeFragmentButton()
-        firebaseUser = FirebaseAuth.getInstance().currentUser
-
-        FirebaseService.sharedPref =
-            this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        FirebaseMessaging.getInstance().token.addOnSuccessListener{
-            FirebaseService.token = it
-            saveToken(it)
-        }
-
-        val btnPillReminder: Button = findViewById(R.id.btn_reminder_pill)
-        val btnPillDrank: Button = findViewById(R.id.btn_pill_drank)
-
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
-        btnPillReminder.setOnClickListener {
-            FirebaseFirestore.getInstance().collection(Constants.CARETAKERS)
-                .document(firebaseUser!!.uid).get().addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val friendId = documentSnapshot.getString("friend").toString()
-                        val username = documentSnapshot.getString("username").toString()
-                        addNotificationReminder(friendId,username)
-
-                    }
-                }
-        }
-        btnPillDrank.setOnClickListener{
-            FirebaseFirestore.getInstance().collection(Constants.USERS)
-                .document(firebaseUser!!.uid).get().addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val friendId = documentSnapshot.getString("friend").toString()
-                        val username = documentSnapshot.getString("username").toString()
-                        addNotificationPillDrank(friendId,username)
-
-                    }
-                }
-        }
-    }
-
-    private fun saveToken(token: String) {
-        val db = FirebaseFirestore.getInstance()
-        val sharedPreferences =
-            this.getSharedPreferences(
-                Constants.SILVERCARE_PREFERENCES,
-                Context.MODE_PRIVATE
-            )
-        val type = sharedPreferences.getString(Constants.USER_TYPE, "")
-        if (type == "Caretaker"){
-            val noteRef = db.collection(Constants.CARETAKERS).document(firebaseUser!!.uid.toString())
-            FirebaseService.token = token
-            noteRef.update("token", token)
-        }else{
-            val noteRef = db.collection(Constants.USERS).document(firebaseUser!!.uid.toString())
-            FirebaseService.token = token
-            noteRef.update("token", token)
-        }
-
 
     }
-
-    private fun badgeSetup(id: Int, alerts: Int = 0) {
-        val badge = navView.getOrCreateBadge(id)
-        badge.isVisible = true
-        badge.number = alerts
-    }
-
-    private fun addNotificationReminder(userId: String, username: String) {
-        //osoba koja ce primiti obavijest
-        val notiRef = FirebaseDatabase.getInstance().reference.child("Notifications")
-            .child(userId)
-
-        val notiMap = HashMap<String, Any>()
-        // osoba koja lajka post
-        notiMap["userId"] = firebaseUser!!.uid
-        notiMap["text"] = this.getString(R.string.pill_schedule_reminder).toString()
-
-        notiRef.push().setValue(notiMap)
-
-        userCollectionReference.document(userId).get()
-            .addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val title = "Pill Reminder"
-                    val message = String.format(resources.getString(R.string.pill_schedule_reminder_push),username)
-                    val recipientToken = documentSnapshot.getString("token").toString()
-                    if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
-                        PushNotification(
-                            NotificationData(title, message),
-                            recipientToken
-                        ).also {
-                            sendNotification(it)
-                        }
-                    }
-                }
-            }
-        //viewModel.setCount(count++)
-       // badgeSetup(R.id.navigation_notifications, viewModel.count.value!!)
-
-    }
-
-    private fun addNotificationPillDrank(userId: String, username: String) {
-        //osoba koja ce primiti obavijest
-        val notiRef = FirebaseDatabase.getInstance().reference.child("Notifications")
-            .child(userId)
-
-        val notiMap = HashMap<String, Any>()
-        // osoba koja lajka post
-        notiMap["userId"] = firebaseUser!!.uid
-        notiMap["text"] = this.getString(R.string.pill_schedule_pill_drank)
-
-        notiRef.push().setValue(notiMap)
-
-        caretakerCollectionReference.document(userId).get()
-            .addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val title = "Pill Reminder"
-                    val message = String.format(resources.getString(R.string.pill_schedule_pill_drank_push),username)
-                    val recipientToken = documentSnapshot.getString("token").toString()
-                    if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
-                        PushNotification(
-                            NotificationData(title, message),
-                            recipientToken
-                        ).also {
-                            sendNotification(it)
-                        }
-                    }
-                }
-            }
-        //viewModel.setCount(count++)
-        // badgeSetup(R.id.navigation_notifications, viewModel.count.value!!)
-
-    }
-
-    private fun sendNotification(notification: PushNotification) =
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = RetrofitInstance.api.postNotification(notification)
-                if (response.isSuccessful) {
-                    Log.d(TAG, "Response: ${Gson().toJson(response)}")
-                } else {
-                    Log.e(TAG, response.errorBody().toString())
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, e.toString())
-            }
-
-        }
 
     private fun showHomeFragmentButton() {
         val sharedPreferences =

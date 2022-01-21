@@ -57,16 +57,11 @@ class NotificationAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notifcation = mNotification[position]
 
-        if(notifcation.getText() == mContext.getString(R.string.pill_schedule_pill_drank))
+        if(notifcation.getText() == mContext.getString(R.string.pill_schedule_pill_taken))
         {
-            holder.text.text = mContext.getString(R.string.pill_schedule_reminder)
+            holder.text.text = mContext.getString(R.string.pill_schedule_pill_taken)
         }else if(notifcation.getText() == mContext.getString(R.string.pill_schedule_reminder)){
             holder.text.text = mContext.getString(R.string.pill_schedule_reminder)
-
-        }else if(notifcation.getText().contains("commented:")){
-            holder.text.text = notifcation.getText()
-                .replace("commented:","commented : ")
-
         }else{
             holder.text.text = notifcation.getText()
         }
@@ -120,7 +115,7 @@ class NotificationAdapter(
                 if (sb.toString().split("=", ",")[11] == FirebaseAuth.getInstance().currentUser!!.uid) {
                             username.text = sb.toString().split("=", ",")[3]
                 }}
-                else{
+                else if((sba.toString().split("=", ",")[11] == FirebaseAuth.getInstance().currentUser!!.uid)){
                     username.text = sba.toString().split("=", ",")[3]
                 }
             }
